@@ -1,0 +1,2986 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>非诉法律知识体系 · PE/VC / IPO / 法律尽职调查</title>
+<style>
+@font-face {
+  font-family: "IBMPlexSerif";
+  src: url("./_shared/fonts/IBMPlexSerif-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBMPlexSerif";
+  src: url("./_shared/fonts/IBMPlexSerif-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --bg: #f6f7f9;
+  --bg2: #ffffff;
+  --ink: #1c2739;
+  --muted: #5d6b80;
+  --rule: #e3e7ee;
+  --accent: #1e3a6e;
+  --accent2: #b08d3e;
+  --accent-soft: #eef2f9;
+  --gold-soft: #faf6ec;
+  --warn-soft: #fdf3ef;
+  --warn-ink: #a2492f;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 15.5px;
+  line-height: 1.78;
+}
+
+/* ===================== 封面 ===================== */
+.hero {
+  background: linear-gradient(135deg, #16294f 0%, #1e3a6e 55%, #274a86 100%);
+  color: #ffffff;
+  padding: 4.5rem 2rem 3.8rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  right: -120px;
+  top: -120px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(176, 141, 62, 0.35);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.hero-inner { max-width: 1240px; margin: 0 auto; position: relative; z-index: 1; }
+.hero-kicker {
+  font-size: 0.82rem;
+  letter-spacing: 0.35em;
+  color: #d8b97a;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+.hero h1 {
+  font-family: "IBMPlexSerif", "Songti SC", "STSong", "Noto Serif SC", serif;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+}
+.hero-sub {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 760px;
+}
+.hero-rule {
+  width: 64px;
+  height: 3px;
+  background: var(--accent2);
+  margin: 1.6rem 0 0;
+}
+.hero-meta {
+  margin-top: 2.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+.hero-meta .chip {
+  border: 1px solid rgba(216, 185, 122, 0.55);
+  color: #e8d5ab;
+  border-radius: 999px;
+  padding: 0.32rem 1.05rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+
+/* 三层框架导航 */
+.framework {
+  max-width: 1240px;
+  margin: -1.9rem auto 0;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+.framework a {
+  text-decoration: none;
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--accent2);
+  border-radius: 10px;
+  padding: 1.15rem 1.3rem;
+  color: var(--ink);
+  box-shadow: 0 10px 26px rgba(23, 38, 66, 0.10);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.framework a:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(23, 38, 66, 0.16); }
+.framework .lv {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: var(--accent2);
+  margin-bottom: 0.35rem;
+}
+.framework .t {
+  font-family: "IBMPlexSerif", "Songti SC", "STSong", serif;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.framework .d { font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.6; }
+
+/* ===================== 布局 ===================== */
+.layout {
+  max-width: 1240px;
+  margin: 2.6rem auto 0;
+  padding: 0 2rem 4rem;
+  display: grid;
+  grid-template-columns: 248px minmax(0, 1fr);
+  gap: 2.4rem;
+  align-items: start;
+}
+
+/* 侧栏目录 */
+.toc {
+  position: sticky;
+  top: 1.4rem;
+  max-height: calc(100vh - 2.8rem);
+  overflow-y: auto;
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 1.25rem 0.9rem;
+  scrollbar-width: thin;
+}
+.toc-title {
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  color: var(--muted);
+  padding: 0 0.6rem 0.7rem;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 0.7rem;
+}
+.toc .part-label {
+  display: block;
+  font-family: "IBMPlexSerif", "Songti SC", serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--accent);
+  padding: 0.55rem 0.6rem 0.25rem;
+}
+.toc a {
+  display: block;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.84rem;
+  padding: 0.3rem 0.6rem 0.3rem 1.35rem;
+  border-left: 2px solid transparent;
+  border-radius: 0 4px 4px 0;
+  line-height: 1.5;
+}
+.toc a:hover { color: var(--accent); background: var(--accent-soft); }
+.toc a.active {
+  color: var(--accent);
+  border-left-color: var(--accent2);
+  background: var(--accent-soft);
+  font-weight: 600;
+}
+.toc .toc-sub { margin-bottom: 0.4rem; }
+
+/* ===================== 正文 ===================== */
+.content { min-width: 0; }
+
+.part-band {
+  background: linear-gradient(120deg, #16294f, #1e3a6e);
+  color: #fff;
+  border-radius: 12px;
+  padding: 2rem 2.2rem;
+  margin: 3.2rem 0 2.2rem;
+  position: relative;
+  overflow: hidden;
+}
+.part-band:first-child { margin-top: 0; }
+.part-band::after {
+  content: "";
+  position: absolute;
+  right: -60px;
+  bottom: -80px;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(176, 141, 62, 0.4);
+}
+.part-band .p-no {
+  font-family: "IBMPlexSerif", "Songti SC", serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: #d8b97a;
+  margin-bottom: 0.5rem;
+}
+.part-band h2 {
+  font-family: "IBMPlexSerif", "Songti SC", "STSong", serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.part-band .p-desc {
+  margin-top: 0.65rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 640px;
+  position: relative;
+  z-index: 1;
+}
+
+section.sec { margin-bottom: 2.6rem; }
+
+h3.sec-h {
+  font-family: "IBMPlexSerif", "Songti SC", "STSong", serif;
+  font-size: 1.32rem;
+  font-weight: 700;
+  color: var(--accent);
+  padding-left: 0.85rem;
+  border-left: 4px solid var(--accent2);
+  margin: 2.4rem 0 1.1rem;
+  line-height: 1.4;
+}
+h3.sec-h:first-child { margin-top: 0; }
+h3.sec-h .no { color: var(--accent2); margin-right: 0.5rem; font-size: 1.05rem; }
+
+h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 1.8rem 0 0.75rem;
+}
+h4 .h-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent2);
+  border: 1px solid var(--accent2);
+  border-radius: 4px;
+  padding: 0.05rem 0.45rem;
+  vertical-align: 0.12em;
+  margin-right: 0.5rem;
+  letter-spacing: 0.06em;
+}
+h5 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 1.3rem 0 0.55rem;
+}
+
+p { margin-bottom: 0.85rem; }
+p:last-child { margin-bottom: 0; }
+
+strong { color: var(--accent); font-weight: 700; }
+mark.key { background: none; color: var(--accent); font-weight: 600; }
+
+ul.plain, ol.plain { padding-left: 1.35rem; margin-bottom: 0.85rem; }
+ul.plain li, ol.plain li { margin-bottom: 0.42rem; }
+ul.plain li::marker { color: var(--accent2); }
+ol.plain li::marker { color: var(--accent2); font-weight: 700; }
+
+/* 提示框 */
+.callout {
+  border-radius: 8px;
+  padding: 0.95rem 1.15rem 0.95rem 1.3rem;
+  margin: 1.1rem 0;
+  font-size: 0.92rem;
+  line-height: 1.72;
+  border-left: 4px solid;
+}
+.callout .co-t {
+  display: block;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.35rem;
+}
+.callout-warn { background: var(--warn-soft); border-color: #c0603a; }
+.callout-warn .co-t { color: var(--warn-ink); }
+.callout-key { background: var(--accent-soft); border-color: var(--accent); }
+.callout-key .co-t { color: var(--accent); }
+.callout-gold { background: var(--gold-soft); border-color: var(--accent2); }
+.callout-gold .co-t { color: #8a6b23; }
+.callout p { margin-bottom: 0.45rem; }
+.callout p:last-child { margin-bottom: 0; }
+
+/* 卡片 */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 1.15rem 1.3rem;
+  margin: 0.9rem 0;
+}
+.card .c-t {
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+  font-size: 0.98rem;
+}
+.card .c-en { font-size: 0.78rem; color: var(--muted); font-weight: 400; margin-left: 0.4rem; }
+
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.grid-2 .card, .grid-3 .card { margin: 0; }
+
+/* 术语卡 */
+.term-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.95rem; margin: 1rem 0; }
+.term {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 0.95rem 1.1rem;
+}
+.term .tm-h {
+  font-family: "IBMPlexSerif", "Songti SC", serif;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 0.98rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.35rem;
+}
+.term .tm-en { font-size: 0.72rem; color: var(--accent2); font-weight: 600; letter-spacing: 0.03em; }
+.term p { font-size: 0.87rem; color: var(--muted); line-height: 1.68; margin: 0; }
+
+/* 表格 */
+.table-wrap {
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 620px;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  margin: 1.1rem 0;
+  background: var(--bg2);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  min-width: 560px;
+}
+thead th {
+  position: sticky;
+  top: 0;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.68rem 0.9rem;
+  white-space: nowrap;
+  font-size: 0.86rem;
+  letter-spacing: 0.03em;
+}
+tbody td {
+  padding: 0.62rem 0.9rem;
+  border-top: 1px solid var(--rule);
+  vertical-align: top;
+  color: var(--ink);
+}
+tbody tr:nth-child(even) { background: #f8fafc; }
+tbody tr:hover { background: var(--accent-soft); }
+td .td-h { font-weight: 700; color: var(--accent); }
+.tbl-caption {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: -0.55rem 0 1rem;
+  padding-left: 0.2rem;
+}
+
+/* 步骤组件 */
+.steps { counter-reset: step; margin: 1.1rem 0; }
+.step {
+  position: relative;
+  padding: 0.2rem 0 0.9rem 3.1rem;
+  border-left: 2px solid var(--rule);
+  margin-left: 1.05rem;
+}
+.step:last-child { padding-bottom: 0; }
+.step::before {
+  counter-increment: step;
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  left: -1.05rem;
+  top: 0.05rem;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--bg);
+  box-sizing: content-box;
+}
+.step .s-t { font-weight: 700; color: var(--accent); margin-bottom: 0.3rem; font-size: 0.97rem; }
+.step p, .step ul { font-size: 0.9rem; color: var(--ink); }
+.step ul { padding-left: 1.25rem; margin: 0.3rem 0 0; }
+.step ul li { margin-bottom: 0.28rem; }
+.step ul li::marker { color: var(--accent2); }
+
+/* 决策点 */
+.dp {
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 1.2rem 1.35rem;
+  margin: 1rem 0;
+}
+.dp .dp-h {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+.dp .dp-no {
+  background: var(--accent2);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 5px;
+  padding: 0.14rem 0.55rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.dp .dp-t {
+  font-family: "IBMPlexSerif", "Songti SC", serif;
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: var(--accent);
+}
+
+/* 对比双栏 */
+.vs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.vs .v-card {
+  border-radius: 10px;
+  padding: 1.05rem 1.2rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+.vs .v-a { background: var(--accent-soft); border: 1px solid #cdd9ec; }
+.vs .v-b { background: var(--gold-soft); border: 1px solid #e8dcc0; }
+.vs .v-t {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+.vs .v-a .v-t { color: var(--accent); }
+.vs .v-b .v-t { color: #8a6b23; }
+.vs .v-en { font-size: 0.72rem; color: var(--muted); font-weight: 500; }
+
+/* Mermaid 图 */
+figure.diagram {
+  margin: 1.3rem 0;
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 1.2rem 1.2rem 0.9rem;
+  text-align: center;
+}
+figure.diagram figcaption {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.65rem;
+  padding-top: 0.6rem;
+  border-top: 1px dashed var(--rule);
+}
+figure.diagram .mermaid { display: flex; justify-content: center; }
+
+/* 层级结构列表 */
+.chain { margin: 1rem 0; }
+.chain .ch-item {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  padding: 0.75rem 1rem;
+  background: var(--bg2);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  margin-bottom: 0.55rem;
+}
+.chain .ch-rank {
+  flex: none;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  line-height: 1.15;
+  letter-spacing: 0.05em;
+}
+.chain .ch-rank b { font-size: 0.85rem; }
+.chain .ch-body { min-width: 0; }
+.chain .ch-t { font-weight: 700; color: var(--accent); font-size: 0.95rem; }
+.chain .ch-d { font-size: 0.86rem; color: var(--muted); line-height: 1.65; margin-top: 0.15rem; }
+.chain .ch-arrow {
+  text-align: center;
+  color: var(--accent2);
+  font-size: 0.85rem;
+  margin: -0.3rem 0 0.25rem;
+}
+
+/* 页脚 */
+footer.report-footer {
+  border-top: 1px solid var(--rule);
+  background: var(--bg2);
+  padding: 2.2rem 2rem 2.6rem;
+  margin-top: 2rem;
+}
+.footer-inner { max-width: 1240px; margin: 0 auto; }
+.footer-note {
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+.footer-note .f-brand {
+  font-family: "IBMPlexSerif", "Songti SC", serif;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* 回到顶部 */
+#backtop {
+  position: fixed;
+  right: 1.4rem;
+  bottom: 1.6rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  background: var(--bg2);
+  color: var(--accent);
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(23, 38, 66, 0.14);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 50;
+}
+#backtop.show { opacity: 1; pointer-events: auto; }
+
+/* 目录导航（浮动按钮 + 抽屉面板） */
+html { scroll-behavior: smooth; }
+#toc-fab {
+  position: fixed;
+  left: 1.4rem;
+  bottom: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(23, 38, 66, 0.22);
+  z-index: 60;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+#toc-fab:hover { background: #2a4a85; transform: translateY(-2px); }
+
+.tocp-mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 39, 57, 0.42);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 70;
+}
+.tocp-mask.show { opacity: 1; pointer-events: auto; }
+
+#toc-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: min(330px, 84vw);
+  background: var(--bg2);
+  border-right: 1px solid var(--rule);
+  box-shadow: 8px 0 30px rgba(23, 38, 66, 0.18);
+  transform: translateX(-102%);
+  transition: transform 0.28s ease;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+}
+#toc-panel.open { transform: translateX(0); }
+.tocp-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--rule);
+  flex: none;
+}
+.tocp-title {
+  font-family: "IBMPlexSerif", "Songti SC", serif;
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 1.02rem;
+  letter-spacing: 0.3em;
+}
+.tocp-close {
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.tocp-close:hover { color: var(--accent); border-color: var(--accent); }
+#toc-panel-body { overflow-y: auto; padding: 0.9rem 1.2rem 1.6rem; flex: 1; scrollbar-width: thin; }
+#toc-panel-body .toc {
+  position: static;
+  max-height: none;
+  overflow: visible;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 2.2rem 0;
+}
+
+/* ===================== 响应式 ===================== */
+@media (max-width: 1080px) {
+  .layout { grid-template-columns: 1fr; gap: 1.6rem; }
+  .toc { position: static; max-height: none; }
+  .framework { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  body { font-size: 15px; }
+  .hero { padding: 3.2rem 1.2rem 2.8rem; }
+  .framework { padding: 0 1.2rem; }
+  .layout { padding: 0 1.2rem 3rem; }
+  .grid-2, .grid-3, .term-grid, .vs { grid-template-columns: 1fr; }
+  .part-band { padding: 1.5rem 1.4rem; }
+}
+
+/* 打印 */
+@media print {
+  .toc, #backtop, #toc-fab, #toc-panel, .tocp-mask, .hero::before, .hero::after, .part-band::after { display: none; }
+  .layout { grid-template-columns: 1fr; }
+  body { background: #fff; }
+  .part-band { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  section.sec { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== 封面 ===================== -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-kicker">Non-litigation Legal Practice</div>
+    <h1>知识清单</h1>
+    <p class="hero-sub">私募股权投资基金（PE/VC）募投管退与法律服务、首次公开募股（IPO）境内境外发行上市、法律尽职调查三大板块构建的非诉业务知识框架。</p>
+    <div class="hero-rule"></div>
+    <div class="hero-meta">
+      <span class="chip">&nbsp;PE / VC</span>
+      <span class="chip">IPO</span>
+      <span class="chip">&nbsp;法律尽职调查</span>
+    </div>
+  </div>
+</header>
+
+<!-- 三层框架导航 -->
+<nav class="framework">
+  <a href="#part-pevc">
+    <div class="lv">PART 01</div>
+    <div class="t">PE / VC</div>
+    <div class="d">PE/VC 募投管退 · PE/VC 的法律服务 · 核心术语</div>
+  </a>
+  <a href="#part-ipo">
+    <div class="lv">PART 02</div>
+    <div class="t">IPO</div>
+    <div class="d">A股与港股 · 赴港上市架构（H股/红筹）· VIE 架构拆除 · 港交所各方主体及职责</div>
+  </a>
+  <a href="#part-legaldd">
+    <div class="lv">PART 03</div>
+    <div class="t">法律尽职调查</div>
+    <div class="d">尽调作用 · 前期准备 · 实施阶段 · 结果报告</div>
+  </a>
+</nav>
+
+<div class="layout">
+
+<!-- ===================== 侧栏目录 ===================== -->
+<aside class="toc" id="toc">
+  <div class="toc-title">目 录</div>
+  <div class="toc-sub">
+    <a href="#part-pevc" class="part-label">第一部分 · PE/VC</a>
+    <a href="#sec-pevc-overview">1.1 PE/VC 概述</a>
+    <a href="#sec-mtg">1.2 PE/VC 募投管退</a>
+    <a href="#sec-mtg-ji">　募集</a>
+    <a href="#sec-mtg-tou">　投资</a>
+    <a href="#sec-mtg-guan">　管理</a>
+    <a href="#sec-mtg-tui">　退出</a>
+    <a href="#sec-pevc-legal">1.3 PE/VC 的法律服务</a>
+    <a href="#sec-pevc-terms">1.4 PE/VC 核心术语</a>
+  </div>
+  <div class="toc-sub">
+    <a href="#part-ipo" class="part-label">第二部分 · IPO</a>
+    <a href="#sec-ipo-overview">2.1 IPO 概述</a>
+    <a href="#sec-abhk">2.2 A股与港股</a>
+    <a href="#sec-hk-arch">2.3 境内企业赴港上市架构</a>
+    <a href="#sec-vie-remove">2.4 VIE 架构拆除</a>
+    <a href="#sec-cnr-return">2.5 中概股回归</a>
+    <a href="#sec-hkex-roles">2.6 港交所IPO各方主体及职责</a>
+    <a href="#sec-knowledge-list">2.7 知识清单</a>
+  </div>
+  <div class="toc-sub">
+    <a href="#part-legaldd" class="part-label">第三部分 · 法律尽职调查</a>
+    <a href="#sec-ldd-role">3.1 法律尽调的作用</a>
+    <a href="#sec-ldd-prep">3.2 尽调前期准备阶段</a>
+    <a href="#sec-ldd-impl">3.3 尽职调查实施阶段</a>
+    <a href="#sec-ldd-report">3.4 结果报告阶段</a>
+  </div>
+</aside>
+
+<!-- ===================== 正文 ===================== -->
+<main class="content">
+
+<!-- ============ 第一部分 PE/VC ============ -->
+<div class="part-band" id="part-pevc">
+  <div class="p-no">PART 01</div>
+  <h2>PE / VC</h2>
+  <p class="p-desc">涵盖 PE/VC 募投管退全流程（募集、投资、管理、退出）与 PE/VC 的法律服务（投资端、融资端、LP 端），并附私募股权与风险投资领域核心术语。</p>
+</div>
+
+<section class="sec" id="sec-pevc-overview">
+  <h3 class="sec-h"><span class="no">1.1</span>PE/VC 概述</h3>
+  <div class="callout callout-key">
+    <span class="co-t">定 义</span>
+    <p>私募股权投资基金（PE/VC）就是一群专业投资者（GP），把特定合格投资者（LP）的钱聚集起来，以非公开的方式投资到未上市或需要重组升级的企业股权中，通过深度参与帮助企业成长、提升价值，最终在企业价值增长后通过上市、并购等方式卖出股权获利退出的投资机构。</p>
+  </div>
+</section>
+
+<section class="sec" id="sec-mtg">
+  <h3 class="sec-h"><span class="no">1.2</span>PE/VC 募投管退</h3>
+
+  <figure class="diagram">
+    <pre class="mermaid" data-processed="true"><svg id="mermaid-1792727762153" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 852.2578125px;" viewBox="0 0 852.2578125 141" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#mermaid-1792727762153{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#000000;}#mermaid-1792727762153 .error-icon{fill:#552222;}#mermaid-1792727762153 .error-text{fill:#552222;stroke:#552222;}#mermaid-1792727762153 .edge-thickness-normal{stroke-width:1px;}#mermaid-1792727762153 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-1792727762153 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-1792727762153 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-1792727762153 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-1792727762153 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-1792727762153 .marker{fill:#666;stroke:#666;}#mermaid-1792727762153 .marker.cross{stroke:#666;}#mermaid-1792727762153 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-1792727762153 p{margin:0;}#mermaid-1792727762153 .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#000000;}#mermaid-1792727762153 .cluster-label text{fill:#333;}#mermaid-1792727762153 .cluster-label span{color:#333;}#mermaid-1792727762153 .cluster-label span p{background-color:transparent;}#mermaid-1792727762153 .label text,#mermaid-1792727762153 span{fill:#000000;color:#000000;}#mermaid-1792727762153 .node rect,#mermaid-1792727762153 .node circle,#mermaid-1792727762153 .node ellipse,#mermaid-1792727762153 .node polygon,#mermaid-1792727762153 .node path{fill:#eee;stroke:#999;stroke-width:1px;}#mermaid-1792727762153 .rough-node .label text,#mermaid-1792727762153 .node .label text,#mermaid-1792727762153 .image-shape .label,#mermaid-1792727762153 .icon-shape .label{text-anchor:middle;}#mermaid-1792727762153 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-1792727762153 .rough-node .label,#mermaid-1792727762153 .node .label,#mermaid-1792727762153 .image-shape .label,#mermaid-1792727762153 .icon-shape .label{text-align:center;}#mermaid-1792727762153 .node.clickable{cursor:pointer;}#mermaid-1792727762153 .root .anchor path{fill:#666!important;stroke-width:0;stroke:#666;}#mermaid-1792727762153 .arrowheadPath{fill:#333333;}#mermaid-1792727762153 .edgePath .path{stroke:#666;stroke-width:2.0px;}#mermaid-1792727762153 .flowchart-link{stroke:#666;fill:none;}#mermaid-1792727762153 .edgeLabel{background-color:white;text-align:center;}#mermaid-1792727762153 .edgeLabel p{background-color:white;}#mermaid-1792727762153 .edgeLabel rect{opacity:0.5;background-color:white;fill:white;}#mermaid-1792727762153 .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#mermaid-1792727762153 .cluster rect{fill:hsl(0, 0%, 98.9215686275%);stroke:#707070;stroke-width:1px;}#mermaid-1792727762153 .cluster text{fill:#333;}#mermaid-1792727762153 .cluster span{color:#333;}#mermaid-1792727762153 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(-160, 0%, 93.3333333333%);border:1px solid #707070;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-1792727762153 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#000000;}#mermaid-1792727762153 rect.text{fill:none;stroke-width:0;}#mermaid-1792727762153 .icon-shape,#mermaid-1792727762153 .image-shape{background-color:white;text-align:center;}#mermaid-1792727762153 .icon-shape p,#mermaid-1792727762153 .image-shape p{background-color:white;padding:2px;}#mermaid-1792727762153 .icon-shape rect,#mermaid-1792727762153 .image-shape rect{opacity:0.5;background-color:white;fill:white;}#mermaid-1792727762153 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="mermaid-1792727762153_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1792727762153_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1792727762153_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-1792727762153_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-1792727762153_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1792727762153_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M149.797,56.646L153.964,55.038C158.13,53.43,166.464,50.215,174.13,48.608C181.797,47,188.797,47,192.297,47L195.797,47" id="L_A_B_0" class=" edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="" marker-end="url(#mermaid-1792727762153_flowchart-v2-pointEnd)"></path><path d="M339.469,47L357.138,47C374.807,47,410.146,47,444.818,47C479.49,47,513.495,47,530.497,47L547.5,47" id="L_B_C_1" class=" edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="" marker-end="url(#mermaid-1792727762153_flowchart-v2-pointEnd)"></path><path d="M702.258,47L706.424,47C710.591,47,718.924,47,726.667,48.863C734.409,50.727,741.56,54.453,745.135,56.316L748.711,58.18" id="L_C_D_2" class=" edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="" marker-end="url(#mermaid-1792727762153_flowchart-v2-pointEnd)"></path><path d="M752.258,107.972L748.091,110.143C743.924,112.315,735.591,116.657,714.695,118.829C693.798,121,660.339,121,613.376,121C566.414,121,505.949,121,446.408,121C386.867,121,328.25,121,283.135,121C238.021,121,206.409,121,187.058,119.632C167.707,118.265,160.618,115.529,157.073,114.162L153.529,112.794" id="L_D_A_3" class=" edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link" style="" marker-end="url(#mermaid-1792727762153_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel "></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel "></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel "></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(445.484375, 121)"><g class="label" transform="translate(-81.015625, -12)"><foreignObject width="162.03125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel "><p>基金到期清算 / 再循环</p></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default  " id="flowchart-A-0" transform="translate(78.8984375, 84)"><rect class="basic label-container" style="fill:#1e3a6e !important;stroke:#1e3a6e !important" x="-70.8984375" y="-39" width="141.796875" height="78"></rect><g class="label" style="color:#ffffff !important" transform="translate(-40.8984375, -24)"><rect></rect><foreignObject width="81.796875" height="48"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#ffffff !important" class="nodeLabel "><p><b>募集</b><br>Fundraising</p></span></div></foreignObject></g></g><g class="node default  " id="flowchart-B-1" transform="translate(269.6328125, 47)"><rect class="basic label-container" style="fill:#b08d3e !important;stroke:#b08d3e !important" x="-69.8359375" y="-39" width="139.671875" height="78"></rect><g class="label" style="color:#ffffff !important" transform="translate(-39.8359375, -24)"><rect></rect><foreignObject width="79.671875" height="48"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#ffffff !important" class="nodeLabel "><p><b>投资</b><br>Investment</p></span></div></foreignObject></g></g><g class="node default  " id="flowchart-C-3" transform="translate(626.87890625, 47)"><rect class="basic label-container" style="fill:#1e3a6e !important;stroke:#1e3a6e !important" x="-75.37890625" y="-39" width="150.7578125" height="78"></rect><g class="label" style="color:#ffffff !important" transform="translate(-45.37890625, -24)"><rect></rect><foreignObject width="90.7578125" height="48"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#ffffff !important" class="nodeLabel "><p><b>管理</b><br>Management</p></span></div></foreignObject></g></g><g class="node default  " id="flowchart-D-5" transform="translate(798.2578125, 84)"><rect class="basic label-container" style="fill:#b08d3e !important;stroke:#b08d3e !important" x="-46" y="-39" width="92" height="78"></rect><g class="label" style="color:#ffffff !important" transform="translate(-16, -24)"><rect></rect><foreignObject width="32" height="48"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#ffffff !important" class="nodeLabel "><p><b>退出</b><br>Exit</p></span></div></foreignObject></g></g></g></g></g></svg></pre>
+    <figcaption>图 1-1　PE/VC「募、投、管、退」全周期循环</figcaption>
+  </figure>
+
+  <!-- ==================== 募集 ==================== -->
+  <h4 id="sec-mtg-ji"><span class="h-tag">募</span>一、募集</h4>
+
+  <h5>（一）基金的组织形式有三种</h5>
+  <div class="card">
+    <div class="c-t">合伙企业型（有限合伙）<span class="c-en">主流形式</span></div>
+    <p>最常见的 PE/VC 基金形式。GP（普通合伙人）管理和承担无限责任，LP（有限合伙人）出资并以出资额为限承担有限责任。税收上<strong>“先分后税”</strong>——合伙企业层面不缴税，分配到 GP 和 LP 后各自缴税。这是主流选择，因为治理灵活、税负合理。</p>
+  </div>
+  <div class="card">
+    <div class="c-t">公司型</div>
+    <p>基金本身是一个有限责任公司或股份有限公司，投资人作为股东。税负上存在<strong>“双重征税”</strong>问题——公司层面缴企业所得税，分红给股东后股东再缴个人所得税。优势是法律主体明确、独立法人地位完整，部分险资和外资偏好公司型。2023 年新公司法引入“类别股”后，公司型基金在条款设计上更灵活了。</p>
+  </div>
+  
+  <div class="card">
+    <div class="c-t">契约型</div>
+    <p>基于信托关系设立的基金，没有独立的法律实体，管理人以自己的名义代基金持有资产。优势是设立简便、税负穿透（不双重征税），劣势是没有独立法人地位、对外投资和签约需要管理人代行。契约型在证券类私募中更常见，股权类相对少。</p>
+  </div>
+
+  <h5>（二）管理人的设立要求</h5>
+  <p>私募股权投资基金管理人必须在<strong>中基协登记</strong>。核心要求包括：</p>
+  <ul class="plain">
+    <li>实缴资本不低于 <strong>1,000 万元</strong>（或实缴资本不低于 200 万元且资本充足）；</li>
+    <li>至少 <strong>3 名全职高级管理人员</strong>，且法定代表人/执行事务合伙人委派代表、合规风控负责人不得兼职；</li>
+    <li>高管应当具备 <strong>3 年以上</strong>相关投资经验；</li>
+    <li>管理人及其高管最近三年不得有重大违法违规记录。</li>
+  </ul>
+
+  <h5>（三）管理人的收入来源有四块</h5>
+  <div class="grid-2">
+    <div class="card">
+      <div class="c-t">管理费<span class="c-en">Management Fee</span></div>
+      <p>基金规模的大约 <strong>2%/年</strong>，是 GP 的固定收入。投资期按认缴规模算，退出期按未退出成本算。这笔钱用来支付团队工资、办公、差旅、DD 费用等运营成本。</p>
+    </div>
+    <div class="card">
+      <div class="c-t">业绩报酬<span class="c-en">Carry</span></div>
+      <p>超额收益的大约 <strong>20%</strong>——LP 先拿回全部本金＋门槛收益率（hurdle rate，通常 8%），之后 GP 拿超出部分的 20%。Carry 才是 GP 真正的激励，但可能要等 7-8 年才能拿到。</p>
+    </div>
+    <div class="card">
+      <div class="c-t">管理人出资<span class="c-en">GP Commitment</span></div>
+      <p>GP 通常需要向自己的基金出资 <strong>1%-5%</strong>（具体比例在 LPA 中约定）。这不是收入，而是一种利益绑定机制，建立信任、降低道德风险。简言之，你的钱也在里面，LP 才信你不是拿别人的钱乱投。国资背景的引导基金通常要求 GP 出资比例更高。</p>
+    </div>
+    <div class="card">
+      <div class="c-t">跟投<span class="c-en">Co-investment</span></div>
+      <p>GP 团队成员个人或设立跟投载体，在基金投资的同时以同等或近似条件跟投特定项目。跟投不占用基金份额，收益直接归个人或跟投载体，这是团队留住核心人员的重要激励工具，但需要在 LPA 中明确跟投的额度上限和分配机制，防止利益冲突。</p>
+    </div>
+  </div>
+
+  <h5>（四）LP 类型与资金属性匹配</h5>
+  <p>不同类别 LP 的投资目标与合规约束存在显著差异，基金管理人需据此差异化适配：</p>
+  <div class="card">
+    <div class="c-t">政府引导基金</div>
+    <p>有<strong>返投要求</strong>——基金必须在当地投资一定比例或金额，常见是基金规模的 <strong>1-1.5 倍</strong>。这是合同约定不是法律强制，但你不满足返投，引导基金可能要求提前退出或降低管理费。</p>
+  </div>
+  <div class="card">
+    <div class="c-t">保险资金<span class="c-en">Insurance Capital</span></div>
+    <p>受国家金融监督管理总局审慎监管，核心约束包括偿付能力监管及投资比例限制。险资 LP 通常要求基金建立更完备的<strong>风险管理体系</strong>、更高频透明的<strong>信息披露机制</strong>、更低的<strong>单一项目集中度</strong>，并设置<strong>行业负面清单</strong>。其优势在于资金体量大、期限长、不干涉日常运营。</p>
+  </div>
+  <div class="card">
+    <div class="c-t">市场化母基金 / 家族办公室</div>
+    <p>决策机制相对灵活，主要看投资回报与<strong>管理团队</strong>。其中家族办公室附加个人投资偏好。</p>
+  </div>
+
+  <h5>（五）人民币基金市场最重要的结构性变化</h5>
+  <div class="vs">
+    <div class="v-card v-a">
+      <div class="v-t">盲池基金<span class="v-en">Blind Pool · 传统架构</span></div>
+      <p>传统基金架构——LP 先行作出资本承诺，由 GP 在完成募资后再于市场上遴选投资标的。LP 在承诺出资阶段<strong>无法预知具体投资组合</strong>，仅能依据 GP 的历史业绩及既定投资策略作出决策。简单来说，LP 先承诺出资，GP 拿到钱后再去市场上找项目。</p>
+      <p>其优势在于 GP 拥有较高的<strong>投资灵活度</strong>与<strong>组合分散能力</strong>；劣势则体现为 LP 面临较高的<strong>信息不对称</strong>，且退出路径存在不确定性。</p>
+    </div>
+    <div class="v-card v-b">
+      <div class="v-t">专项基金<span class="v-en">Project Fund / Deal-by-Deal Fund · 新兴架构</span></div>
+      <p>近年兴起的基金架构——GP 预先锁定特定投资标的，再围绕该标的向 LP 定向募集资金。简言之，GP 先锁定一个具体项目，再围绕这个项目向 LP 募资。</p>
+      <p>专项基金的优势是<strong>底层资产明确、确定性高</strong>、LP 能看到具体投什么；劣势是<strong>组合分散度低、单一项目风险集中</strong>。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="c-t">美元基金的收缩</div>
+    <p><strong>境外 LP 资本回撤</strong>：加拿大养老金（CDPQ、OTPP、BCI）等国际长线资本大规模撤退或关闭中国办公室；② 中概股赴美上市基本停滞；③ A 股对 VIE 架构的限制让美元基金投的项目难以回归境内上市。</p>
+    <p><strong>结果</strong>：除头部机构外，大部分美元基金已基本停止在中国的募资活动。人民币基金成为绝对主流，但人民币资金主要由国资和政府引导基金主导，形成“央企 + 地方政府 + 社会化配资”的主流结构。</p>
+  </div>
+
+  
+</section>
+
+<!-- ==================== 投资 ==================== -->
+<section class="sec" id="sec-mtg-tou-sec">
+  <h4 id="sec-mtg-tou"><span class="h-tag">投</span>二、投资</h4>
+
+  <h5>（一）交易结构的选择</h5>
+  <div class="vs">
+    <div class="v-card v-a">
+      <div class="v-t">股权转让<span class="v-en">Equity Transfer</span></div>
+      <p>交易对价支付予存量股东。自然人卖方适用 <strong>20% 个人所得税</strong>。若交易为老股东提供流动性退出机会，需进一步考量卖方减持动机，其出售时点本身构成重要的<strong>投资决策信号</strong>。</p>
+    </div>
+    <div class="v-card v-b">
+      <div class="v-t">增资扩股<span class="v-en">Capital Increase</span></div>
+      <p>投资款进入目标公司账户，用于公司经营发展。该方式不会导致存量股东套现，但会<strong>稀释</strong>老股东持股比例。</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="c-t">境内架构 vs 境外架构</div>
+    <p>当前市场整体趋势为红筹架构拆除与境内回归。中国证监会于 2023 年实施的<strong>境外上市备案制度（“大路条”）</strong>系境内企业境外发行上市的前置审批条件，境内企业赴境外上市（含港股）须取得证监会出具的备案通知。美股上市通道基本停滞，香港联交所（HKEX）已成为中资企业境外上市的主要可行路径。</p>
+  </div>
+  <div class="card">
+    <div class="c-t">一次交割 vs 分步交易（Tranching）</div>
+    <p>分步交易中各期交割的<strong>先决条件（Conditions Precedent, CP）</strong>必须具备客观可验证性。例如“取得产品上市批件”系可验证条件，而“产品市场表现良好”则属主观标准（条件触发时双方极易产生争议）。</p>
+  </div>
+
+  <h5>（二）投资行业分类</h5>
+  <p>当前 PE/VC 投资的公司，按行业大致分为以下几类，每一类的法律关注点不同：</p>
+  <div class="grid-2">
+    <div class="card">
+      <div class="c-t">硬科技 / 半导体 / AI<span class="c-en">当前最热赛道</span></div>
+      <p>法律关注点：核心技术的 <strong>IP 权属</strong>（尤其是高校/科研院所转化项目）、出口管制和技术封锁风险、涉密资质。摩尔线程、沐曦股份 2025 年在科创板上市——审核仅 122 天和 135 天，说明监管对这个赛道开了“绿灯通道”。</p>
+    </div>
+    <div class="card">
+      <div class="c-t">医药 / 生物科技</div>
+      <p>法律关注点：<strong>专利布局</strong>（化合物 → 晶型 → 制剂 → 用途的专利家族）、临床数据合规、MAH（药品上市许可持有人制度，Marketing Authorization Holder）下的产权与生产权分离。上市路径以港股 18A 为主、科创板第五套为辅（窗口在收窄）。</p>
+    </div>
+    <div class="card">
+      <div class="c-t">新能源 / 新材料</div>
+      <p>宁德时代 2025 年港股 IPO 募资 410 亿港元——全球第二大 IPO。法律关注点：环评合规、产能指标获取、补贴政策依赖。</p>
+    </div>
+    <div class="card">
+      <div class="c-t">消费 / 品牌</div>
+      <p>蜜雪冰城、老铺黄金、泡泡玛特在港股表现亮眼。法律关注点：加盟模式的合规性、食品安全、商标保护、渠道真实性。</p>
+    </div>
+    <div class="card">
+      <div class="c-t">商业航天 / 低空经济</div>
+      <p>蓝箭航天、中科宇航等已进入上市辅导——2026 年可能是这一赛道 IPO 的元年。法律关注点：特许经营资质、空域审批、军民融合的合规边界。</p>
+    </div>
+    <div class="card">
+      <div class="c-t">高端制造 / 工业科技</div>
+      <p>三一重工 2025 年港股 IPO 募资 153 亿港元。法律关注点：环保合规、安全生产、出口管制。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 管理 ==================== -->
+<section class="sec" id="sec-mtg-guan-sec">
+  <h4 id="sec-mtg-guan"><span class="h-tag">管</span>三、管理</h4>
+
+  <h5>（一）日常三会</h5>
+  <p>日常三会——<strong>股东会、董事会、监事会</strong>（新公司法下有限责任公司的监事会不再是强制要求，可设审计委员会替代）。作为投资人，投后工作至少包括：按时参加董事会、会前阅读材料并形成意见；关注董事会上表决的事项是否涉及你的保护性条款；如果你是被投公司的董事，你承担《公司法》规定的<strong>忠实义务和勤勉义务</strong>——你的决策需要平衡 LP 利益和公司整体利益。</p>
+
+  <h5>（二）价值创造</h5>
+  <div class="card">
+    <div class="c-t">对接已投项目之间</div>
+    <p>portfolio（投资组合）内的协同，GP 利用自己作为多家公司股东的身份，<strong>撮合被投企业之间的业务合作</strong>，让 1+1 &gt; 2。</p>
+    <div class="callout callout-gold" style="margin-bottom:0.5rem;">
+      <span class="co-t">例 子</span>
+      <p>某 GP 投了：A 公司：动力电池正极材料企业；B 公司：新能源汽车整车厂；C 公司：充电设备运营商。</p>
+      <p><strong>GP 促成的协同</strong>：1. B 向 A 采购正极材料（供应链协同）；2. B 的车型预装 C 的充电服务（渠道协同）；3. A 和 C 联合开发“车-桩-电池”数据平台（技术协同）。</p>
+      <p><strong>结果</strong>：三家公司都获得了业务增长，GP 的 portfolio 整体价值提升，退出时回报更好。</p>
+    </div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="c-t">对接国资 LP 资源</div>
+      <p>如果你的 LP 中有政府引导基金，它们通常能对接当地的产业园区、人才政策、税收优惠。</p>
+    </div>
+    <div class="card">
+      <div class="c-t">协助招聘</div>
+      <p>帮被投公司招关键岗位——CFO、法务总监、CTO。你的行业人脉在这里是最直接的“增值服务”。</p>
+    </div>
+  </div>
+  <div class="card">
+    <div class="c-t">其他事务</div>
+    <p>协助公司对接下一轮融资、参与制定上市计划、在 BD 交易中提供法律和商业建议。</p>
+  </div>
+
+  <h5>（三）风险监控</h5>
+  <p>风险监控是投后管理的核心职能之一——投资人通过<strong>持续获取信息</strong>和<strong>行使权利</strong>，及时发现被投公司的风险信号，并采取相应措施保护自身利益。</p>
+  <div class="card">
+    <div class="c-t">第一道防线：信息权</div>
+    <p>信息权是投资人在 SHA（股东协议）中约定的、有权定期获取公司信息的权利。没有信息权，根本不知道公司发生了什么。（定期获取财务报表和经营数据）</p>
+  </div>
+  <div class="card">
+    <div class="c-t">第二道防线：保护性条款</div>
+    <p>保护性条款是 SHA 中约定的、<strong>某些重大事项必须经过投资人同意才能实施</strong>的条款。投资人通过检查这些条款的触发状态，监控公司是否在做损害你利益的事。</p>
+  </div>
+</section>
+
+<!-- ==================== 退出 ==================== -->
+<section class="sec" id="sec-mtg-tui-sec">
+  <h4 id="sec-mtg-tui"><span class="h-tag">退</span>四、退出</h4>
+
+  <div class="card">
+    <div class="c-t">路径一：首次公开发行（IPO）</div>
+    <p>IPO 系退出回报最高、但法律关系最为复杂的退出路径。核心要点有三：</p>
+    <ul class="plain">
+      <li><strong>股份锁定</strong>：Pre-IPO 轮投资人所持股份的锁定期通常为<strong>上市后 12 个月</strong>。该期限由交易所上市规则强制规定，属法定强制条款，不具有谈判空间。</li>
+      <li><strong>减持限制（Shareholding Reduction Restrictions）</strong>：锁定期届满后，投资人不得一次性清仓减持。通过大宗交易（Block Trade）及集中竞价（Centralized Bidding）减持均受减持节奏与比例限制约束。持股比例达 5% 以上的股东，减持前须履行<strong>预披露义务</strong>。</li>
+      <li><strong>信息披露</strong>：投资人的持股变动将在上市公司公告中披露，不再具有隐名持股属性。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="c-t">路径二：并购（M&amp;A）</div>
+    <p>不同类型买方的尽调重点与交易诉求存在显著差异：</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>买方类型</th><th>关注重点</th><th>交易特点</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="td-h">跨国企业（MNC）/ 行业龙头</span></td>
+            <td>战略收购，核心诉求为通过标的管线（Pipeline，公司在研的产品线梯队，比如一款药从临床前 → I期 → II期 → III期 → 上市，就是一条管线）或技术平台补强自身业务布局。法务团队专业度高，尽调深度远超财务投资，重点关注<strong>知识产权权属</strong>及<strong>自由实施分析（Freedom to Operate, FTO，一项知识产权法律分析）</strong>。</td>
+            <td>通常倾向整体收购，并要求创始团队签署长期竞业禁止协议及留任协议。</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">国有资本（中央企业 / 地方国有企业）</span></td>
+            <td>决策链条较长，需履行国资监管程序，包括国资委审批、资产评估备案及进场交易。</td>
+            <td>交易确定性较低——即使签署意向书（LOI），审批环节仍存在不确定性。国资买方对估值持保守态度系行业常态。</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">上市公司</span></td>
+            <td>通常以发行股份及支付现金方式收购。投资人取得的对价中包含上市公司股份，实际回报取决于该股份解锁后的二级市场表现。需关注信息披露义务及证监会对重大资产重组的审核标准。</td>
+            <td>对价含上市公司股票，回报取决于解锁后股价表现。</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">PE 基金（Secondary Buyout, SBO）</span></td>
+            <td>系同业机构接盘。交易流程高效（交易双方使用同一套行业话语体系）。</td>
+            <td>PE 买方出价存在上限（需为其自身 LP 预留回报空间）。通常采用杠杆收购结构，需关注收购完成后标的公司的债务结构及现金流承压情况。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>并购交易中，SHA 项下的<strong>拖售权（Drag-along Right）</strong>系推动交易完成的核心工具——在多数股东同意出售时，可强制少数异议股东共同出售。拖售权的行使须以<strong>公允价格</strong>及<strong>善意商业目的</strong>为前提。</p>
+    <p><strong>优先购买权（Right of First Refusal, ROFR）</strong>——创始人对外转让股权时，投资人享有同等条件下的优先受让权。</p>
+  </div>
+
+  <div class="card">
+    <div class="c-t">路径三：股权回购</div>
+    <p>股权回购系对赌失败后的主要救济手段。核心结论：<strong>与目标公司对赌 = 纸面富贵</strong>——公司减资需经股东会三分之二以上表决权通过，少数股东实操中难以推动；<strong>与创始人个人对赌 = 真金白银</strong>。创始人通常要求<strong>以其持有的股权价值为限承担责任</strong>——即仅以所持标的公司股权价值为限承担对赌补偿责任，不涉及其个人名下其他财产（房产、存款等）。该诉求系创始人的核心诉求，亦是交易谈判的核心博弈点。</p>
+  </div>
+
+  <div class="card">
+    <div class="c-t">路径四：BD 交易（Business Development）</div>
+    <p>不卖公司，而是卖出某个产品线、某个技术平台、某个区域市场的权益。可以让投资人在公司整体 IPO 或并购之前实现部分现金回流。如果被投公司通过 license-out（对外许可）拿到首付款和里程碑付款——基金可以考虑通过分红或老股转让实现部分退出。</p>
+    <div class="callout callout-gold">
+      <span class="co-t">例 子</span>
+      <p>某 A 公司研发了一款抗癌药，临床前数据很好，某大药企想买下这个药的权益。</p>
+      <p><strong>交易结构</strong>：首付款 5,000 万 + 里程碑付款（临床成功付 1 亿、上市付 2 亿）+ 销售提成。A 公司保留公司所有权，但卖出了这款药的权益。</p>
+    </div>
+    <div class="callout callout-warn">
+      <span class="co-t">注 意</span>
+      <p>但要特别注意：公司法规定，向股东分红的前提是公司有<strong>可分配利润</strong>——即历年亏损已经弥补完毕、提取法定公积金之后剩余的净利润。大量研发型公司在研发阶段持续亏损，这意味着在很长一段时间内，公司财务报表上没有可分配利润，无法直接分红。</p>
+      <p>因此不能指望 license-out 收款后立刻通过分红回流给 LP——需要提前设计好资金回流路径（比如通过老股转让而非分红）。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="c-t">清算优先权</div>
+    <p>清算优先权是投资人在公司发生清算事件时，优先于普通股股东（通常是创始人）分配公司资产的权利。清算优先权下两种模式的差异：</p>
+    <div class="vs">
+      <div class="v-card v-a">
+        <div class="v-t">非参与型清算优先权</div>
+        <p>清算事件发生时，投资人优先取回投资本金（假设为 1 倍，即 1x），随后在<strong>按持股比例参与剩余资产分配</strong>与<strong>保留已取回本金</strong>之间择一较高者。其本质系投资人“取回本金 + 一份回报”的<strong>选择权（Option）</strong>。</p>
+      </div>
+      <div class="v-card v-b">
+        <div class="v-t">参与型清算优先权</div>
+        <p>投资人优先取回本金后，<strong>仍按持股比例参与剩余资产分配</strong>，即“双重分配”。该机制对投资人极度有利、对创始人极度不利。在公司以中等估值被收购时，参与型与非参与型的回报差距可达数倍。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout callout-warn">
+    <span class="co-t">注意股东关系</span>
+    <p>无论你手里有什么厉害的权利（veto、drag-along、清算优先权），在中国市场环境下，很多权利的执行依赖股东的持续配合。比如工商变更——增资、减资、股权转让——通常需要全体股东签字同意。如果小股东不配合，你的权利在纸面上是一回事，在工商窗口是另一回事。所以不管你手里的条款多强，你永远需要考虑与公司和其他股东的持续友好关系。</p>
+  </div>
+</section>
+
+<!-- ============ 1.3 PE/VC 的法律服务 ============ -->
+<section class="sec" id="sec-pevc-legal">
+  <h3 class="sec-h"><span class="no">1.3</span>PE/VC 的法律服务</h3>
+
+  <h4>一、概述</h4>
+  <p>PE/VC 律师主要为三类主体提供全周期法律服务：</p>
+  <div class="grid-3">
+    <div class="card">
+      <div class="c-t">投资机构（GP/基金）</div>
+      <p>投资端服务</p>
+    </div>
+    <div class="card">
+      <div class="c-t">被投企业（目标公司）</div>
+      <p>融资端服务</p>
+    </div>
+    <div class="card">
+      <div class="c-t">有限合伙人（LP）</div>
+      <p>出资人权益服务</p>
+    </div>
+  </div>
+  <p>工作贯穿<strong>“募、投、管、退”</strong>各环节。其核心作用在于“法律风险把控”与“商业价值实现”的结合，通过专业法律技能在复杂投融资交易中为各方提供合规保障并促成交易。</p>
+  <div class="callout callout-key">
+    <span class="co-t">核心原则</span>
+    <p>每个决策都是在做风险分配，律师的任务是确保风险分配的方向对客户有利，且纸面上的权利在实操中能执行。</p>
+  </div>
+
+  <h4>二、为投资机构（GP/基金）提供的服务（投资端）</h4>
+
+  <h5>（一）基金设立与募资（“募”）</h5>
+
+  <p><strong>1. 基金架构设计</strong>——一只典型人民币股权投资基金规模通常 1,000 万元起，期限 5-10 年（投资期 3-5 年 + 退出期 2-5 年）。基金组织形式有三种：</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:18%">组织形式</th><th>特点</th><th style="width:22%">适用场景</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="td-h">有限合伙（主流）</span></td>
+          <td>GP 管理并承担无限责任，LP 以出资额为限承担有限责任；税收“先分后税”；治理灵活</td>
+          <td>绝大多数 PE/VC 基金</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">公司型</span></td>
+          <td>基金为独立法人，投资人作为股东；存在双重征税；2023 年新公司法引入类别股后条款更灵活</td>
+          <td>险资、外资偏好</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">契约型</span></td>
+          <td>基于信托关系，无独立法人；设立简便、税负穿透；对外投资需管理人代行</td>
+          <td>证券类私募常见，股权类较少</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>2. 管理人登记合规</strong>——私募股权管理人必须在中基协登记，核心要求：</p>
+  <ul class="plain">
+    <li>实缴资本不低于 1,000 万元（或实缴 ≥200 万且资本充足）</li>
+    <li>至少 3 名全职高管，法定代表人/合规风控负责人不得兼职</li>
+    <li>高管具备 3 年以上相关投资经验</li>
+    <li>管理人及高管最近三年无重大违法违规记录</li>
+  </ul>
+
+  <p><strong>3. LPA 核心经济条款设计</strong></p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:20%">条款</th><th style="width:16%">行业惯例</th><th>说明</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="td-h">管理费</span></td>
+          <td>大约 2%/年</td>
+          <td>GP 的固定收入。投资期按认缴规模算，退出期按未退出成本算；用于团队工资、办公、DD 等运营成本</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">业绩报酬（Carry）</span></td>
+          <td>大约 20%</td>
+          <td>LP 先拿回本金 + 门槛收益率（Hurdle Rate，通常 8%）后，GP 拿超额收益的 20%。Carry 才是 GP 真正的激励，但可能要等 7-8 年才能拿到。</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">GP 出资</span></td>
+          <td>1%-5%</td>
+          <td>GP 自己也出钱，利益绑定（skin in the game），国资引导基金通常要求更高比例。这不是收入，而是是一种利益绑定机制，建立信任、降低道德风险。简言之，你的钱也在里面，LP 才信你不是拿别人的钱乱投。国资背景的引导基金通常要求 GP 出资比例更高。</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">门槛收益率</span></td>
+          <td>大约 8% 年化</td>
+          <td>LP 的最低优先回报，未达到则 GP 无 carry</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="tbl-caption">跟投（Co-investment）：GP 团队成员个人或设立跟投载体，在基金投资的同时以同等或近似条件跟投特定项目。跟投不占用基金份额，收益直接归个人或跟投载体，这是团队留住核心人员的重要激励工具，但需要在 LPA 中明确跟投的额度上限和分配机制，防止利益冲突。</p>
+
+  <p><strong>4. GP-LP 法律关系：信义义务</strong>——GP 对 LP 承担的不是委托代理关系，而是<strong>信义义务（Fiduciary Duty）</strong>——这是法定义务，不是合同义务。</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:16%">义务类型</th><th style="width:42%">核心要求</th><th>典型违规情形</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="td-h">忠诚义务</span></td>
+          <td>以 LP 利益最大化为目标，不得将自身利益置于 LP 之前</td>
+          <td>自我交易、篡夺投资机会、利益冲突不披露、秘密获利</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">注意义务</span></td>
+          <td>像管理自己资产一样审慎管理基金</td>
+          <td>未尽充分尽调就投资、投后不跟踪、隐瞒风险</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>即使 LPA 没有明确禁止，GP 也不能做“对 LP 不利但对 GP 有利”的事。信义义务原则上不能通过合同排除。</p>
+
+  <p><strong>5. LP 类型与差异化条款</strong></p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:24%">LP 类型</th><th style="width:34%">核心约束</th><th>条款适配要点</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="td-h">政府引导基金</span></td>
+          <td>返投要求（通常基金规模的 1-1.5 倍）</td>
+          <td>约定返投比例认定标准、未达标后果（提前退出/降管理费）、让利机制</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">险资</span></td>
+          <td>偿付能力监管、投资比例限制</td>
+          <td>严格风控体系、透明信息披露、单项目集中度限制、行业负面清单</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">市场化母基金/家族办公室</span></td>
+          <td>相对灵活，主要看回报和团队</td>
+          <td>家族办公室可能附带个人投资偏好</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h5>（二）投资阶段（“投”）</h5>
+
+  <div class="dp">
+    <div class="dp-h"><span class="dp-no">决策点 1</span><span class="dp-t">项目立项</span></div>
+    <p>立项 = <strong>合规审查 + 留痕迹</strong>。核心两项工作：</p>
+    <ul class="plain">
+      <li><strong>项目来源合规性审查</strong>：FA 推荐需核实其资质和收费安排；个人社交关系来源需确认不构成利益冲突</li>
+      <li><strong>利益冲突审查</strong>：个人/亲属与项目方的投资关系、前机构接触过的项目、LP 同时是项目方老股东等场景；发现冲突第一动作是向合规部书面报告，而非自行判断</li>
+    </ul>
+    <div class="callout callout-key">
+      <span class="co-t">结 论</span>
+      <p>立项报告中的项目来源、利益冲突审查结论、初步判断依据，都会成为后续追责时的证据。不披露比有冲突本身更危险。</p>
+    </div>
+  </div>
+
+  <div class="dp">
+    <div class="dp-h"><span class="dp-no">决策点 2</span><span class="dp-t">NDA 签署</span></div>
+    <p>NDA 是接触项目信息前必须签署的第一份法律文件。作为投资人（信息接收方），目标是<strong>减少自身义务负担、争取例外条款和弹性空间</strong>。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:20%">要点</th><th>接收方立场</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="td-h">① 保密信息定义</span></td>
+            <td>明确、清晰、合理限缩；不接受需标注“保密”才构成保密信息的条款（口头交流无法标注）</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">② 豁免范围</span></td>
+            <td>必须写全：签署前已知、已公开、从无保密义务第三方获知、非因己方过错披露、自主研究发现</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">③ 接收人范围</span></td>
+            <td>限于关联方董事、高管、雇员、顾问；争取“促使接收人保密”措辞，避免连带责任；须包含系统自动备份等技术例外</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">④ 保密期限</span></td>
+            <td>越短越好，最多不超过 3 年，不接受无限期</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">⑤ 违约责任</span></td>
+            <td>能不约定就不约定；如果披露方坚持，改为双方责任（“守约方”和“违约方”表述），同时要求披露方陈述保证其有权披露信息。可争取赔偿责任上限。如果对方要求禁令救济，审查触发标准，不接受“披露方认为可能泄漏时”这种主观标准，改为“有相当程度证据或足以确信的标准”</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">⑥ 争议解决</span></td>
+            <td>境内：中国法+仲裁（己方所在地或折中地）；境外：优先香港法+HKIAC，其次新加坡法+SIAC</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout callout-warn">
+      <span class="co-t">注 意</span>
+      <p>不要主动提出、也不要轻易接受增加接收方义务的条款，如不竞争条款、不招揽条款。这些内容超出了 NDA 的合理范围。</p>
+    </div>
+  </div>
+
+  <div class="dp">
+    <div class="dp-h"><span class="dp-no">决策点 3</span><span class="dp-t">Term Sheet</span></div>
+    <p>签署 TS 之前要想清楚，你的商业意图是什么？两种情况：</p>
+    <ul class="plain">
+      <li>如果是为了给公司信心、换取尽早开放尽调和争取排他谈判地位，交易条款可以相对原则和抽象，不确定或容易引发争议的内容留到正式文件再谈。</li>
+      <li>如果是为了在正式谈判前尽可能凝聚共识、减少来回，可以考虑适当充实细化条款，尽管这些内容不具约束力。</li>
+    </ul>
+    <p>TS 不具有法律约束力的边界在哪——除保密、排他期、费用承担、适用法律、争议解决条款外，本 TS 不构成具有法律约束力的协议。</p>
+    <div class="vs">
+      <div class="v-card v-a">
+        <div class="v-t">有约束力的条款</div>
+        <ul class="plain" style="margin:0;">
+          <li>保密义务</li>
+          <li>排他期（通常 60-180 天）</li>
+          <li>费用承担</li>
+          <li>适用法律与争议解决</li>
+        </ul>
+      </div>
+      <div class="v-card v-b">
+        <div class="v-t">无约束力的条款</div>
+        <ul class="plain" style="margin:0;">
+          <li>估值和投资金额</li>
+          <li>交易结构（增资/老股）</li>
+          <li>董事会席位</li>
+          <li>保护性条款、回购权、反稀释、清算优先权等所有商业条款</li>
+        </ul>
+      </div>
+    </div>
+    <p><strong>TS 中需要谈的关键条款速览：</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:22%">条款</th><th>谈判要点</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="td-h">交易结构</span></td><td>增资 vs 老股转让，或两者组合。老股通常有折扣，可降低综合估值。老股和新股权利是否一致？如果老股不享有回购/反稀释/跟随出售权，在设计交易结构时就要想清楚。</td></tr>
+          <tr><td><span class="td-h">估值</span></td><td>投前估值 × 持股比例 ≠ 你投的钱。投后估值 = 投前 + 投资金额。</td></tr>
+          <tr><td><span class="td-h">资金用途</span></td><td>限制投资款用途（主营研发经营），明确不得用于偿还股东债务。</td></tr>
+          <tr><td><span class="td-h">董事会</span></td><td>你持股到多少可以委派几名董事？通常 5% 以上争取 1 席。</td></tr>
+          <tr><td><span class="td-h">保护性条款</span></td><td>哪些事项需要你的同意？章程修改、增减资、合并分立、对外担保、关联交易。</td></tr>
+          <tr><td><span class="td-h">回购权</span></td><td>触发条件（未按期上市、创始人重大违约、同业竞争等）、回购价格（本金 + 8% 年化）、回购义务人（公司？创始人？）</td></tr>
+          <tr><td><span class="td-h">股权转让限制</span></td><td>创始人锁股 + 允许少量转让（如每年 5% 以内），但不得导致实控人变更。</td></tr>
+          <tr><td><span class="td-h">优先认购/购买/共售/领售</span></td><td>四权体系，你的退出权力从弱到强。</td></tr>
+          <tr><td><span class="td-h">清算优先权</span></td><td>参与型 vs 非参与型，决定了退出时你能拿回多少。</td></tr>
+          <tr><td><span class="td-h">反稀释</span></td><td>广义加权平均 vs 完全棘轮。市场惯例是加权平均。</td></tr>
+          <tr><td><span class="td-h">信息权</span></td><td>季度报表、年度审计报告、重大事项通报，你的第一道防线。</td></tr>
+          <tr><td><span class="td-h">竞业禁止</span></td><td>创始人 + 核心团队全职服务 + 不竞争。</td></tr>
+          <tr><td><span class="td-h">最惠国待遇</span></td><td>如果公司给后续投资人更优条件，你自动享有。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>排他期是 TS 中最重要的有约束力条款之一。标准长度 60-180 天。排他期内公司不得与其他投资人洽谈，这是你花钱买来的“独家谈判窗口”。但排他期也是你的时间压力：到期没谈成，公司就可以接触其他投资人，你的谈判地位瞬间下降。</p>
+    <p>费用承担通常约定：交易完成则各方费用自理或公司承担投资方合理费用（律师费、尽调费等，有上限）；因非投资方原因未完成则公司承担。</p>
+    <div class="callout callout-warn">
+      <span class="co-t">注 意</span>
+      <p>TS 不具约束力 ≠ 可以随便签。TS 谈下来的条款框架大概率就是最终交易文件的框架，在 TS 阶段让掉的条款，在 SPA/SHA 阶段极难要回来。</p>
+    </div>
+  </div>
+
+  <div class="dp">
+    <div class="dp-h"><span class="dp-no">决策点 4</span><span class="dp-t">尽职调查（DD）</span></div>
+    <p>DD 的价值：<strong>验证投资假设是否成立以及发现未知风险</strong>。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:20%">DD 维度</th><th>法律尽调重点</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="td-h">法律 DD</span></td><td>股权沿革、资产权属（专利/商标/不动产/域名）、或有负债（诉讼/担保/处罚）、重大合同、资质证照、劳动合规</td></tr>
+          <tr><td><span class="td-h">财务 DD</span></td><td>三张表真实性、收入确认合规性、关联交易、表外负债（对外担保、未决诉讼）、税务合规、现金流</td></tr>
+          <tr><td><span class="td-h">商业 DD</span></td><td>市场空间、竞争格局、客户供应商集中度、产品技术壁垒、团队背景</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>三种 DD 的交叉验证才是真正的价值。比如财务 DD 发现公司有一笔大额预付款，法律 DD 要去核实这笔预付款的合同基础和商业实质，是不是关联交易？有没有被挪用？商业 DD 要核实这个供应商是不是真的在给公司提供服务。</p>
+    <p><strong>DD 发现的问题分三级：</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:16%">等级</th><th style="width:52%">典型情形</th><th>应对动作</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="td-h">重大</span></td><td>核心专利权属瑕疵、创始人诚信问题、可能中断经营的重大诉讼</td><td>立即上报，暂停推进</td></tr>
+          <tr><td><span class="td-h">一般</span></td><td>部分员工社保未足额缴纳、某项资质即将到期</td><td>记入风险矩阵，SPA 设置保护条款</td></tr>
+          <tr><td><span class="td-h">提示性</span></td><td>租赁合同即将到期</td><td>纳入投后跟踪清单</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="dp">
+    <div class="dp-h"><span class="dp-no">决策点 5</span><span class="dp-t">内部投决</span></div>
+    <p>投决报告是分析师的法律责任锚点。隐瞒 DD 中发现的风险 = 未履行勤勉义务，远超“疏忽”范畴。</p>
+    <p><strong>IC 成员的勤勉义务</strong>：充分阅读投决报告和 DD 报告、对重大风险提出质疑、在会议纪要中记录意见（尤其是反对意见）。利益关联方须主动回避。</p>
+    <div class="callout callout-key">
+      <span class="co-t">结 论</span>
+      <p>投决的全部意义在于留痕迹。反对意见、提出的风险、要求补充的尽调都要记录在案。IC 会议纪要是追责时的第一证据。</p>
+    </div>
+  </div>
+
+  <div class="dp">
+    <div class="dp-h"><span class="dp-no">决策点 6</span><span class="dp-t">SPA/SHA 谈判</span></div>
+    <p>实务重点：<strong>赔偿机制和条款联动</strong>。</p>
+    <p><strong>一、赔偿条款的三个层次</strong>——很多人把“赔偿”理解为一个笼统的条款。实际上赔偿分为三个层次，各自逻辑完全不同：</p>
+    <div class="card">
+      <div class="c-t">① 一般赔偿（General Indemnity）</div>
+      <p>针对卖方陈述与保证（R&amp;W）不实的情况。买方主张卖方在签约时承诺的“公司是干净的”与实际情况不符，要求赔偿。这一层的核心是<strong>“陈述是否失实”</strong>。赔偿上限、赔偿期限、materiality qualifier 和 knowledge qualifier 都在这一层谈。</p>
+      <p><strong>披露函（Disclosure Letter）</strong>是一般赔偿的关键配套工具。卖方在签约时把所有与 R&amp;W 不符的情况逐项列出来：R&amp;W 说“公司没有未决诉讼”，披露函里写“实际上有这么两起诉讼，案件号 XXX、案由 XXX、金额 XXX”。披露函的法律效果：被披露的事项视为对 R&amp;W 的例外，卖方就这些事项不再承担“陈述不实”的赔偿责任。这跟反向沙袋直接挂钩——在反向沙袋规则下，买方既然在交割前已经通过披露函知道了这些情况，仍然选择交割，就视为接受了这些风险，卖方无需赔偿。所以披露函写得越细、越具体，卖方的保护越充分；写得越模糊（比如“公司可能存在某些诉讼风险”），买方日后索赔的空间越大。披露函必须在 SPA 签署前完成，交割后才补的披露无效。</p>
+    </div>
+    <div class="card">
+      <div class="c-t">② Sandbagging 条款</div>
+      <p>决定买方在交割前已知卖方某项 R&amp;W 不实的情况下，交割后还能否就此索赔。只有三种写法：</p>
+      <ul class="plain">
+        <li><strong>正向沙袋（Pro-sandbagging）</strong>：买方知道卖方违反 R&amp;W，仍不影响索赔权利。这是一项通用性权利，适用于所有卖方 R&amp;W 不实的情形。核心是“知情”：买方知情，但知情不限制索赔权力。</li>
+        <li><strong>反向沙袋（Anti-sandbagging）</strong>：买方在交割前知道 R&amp;W 不实却仍然交割，视为放弃就该 R&amp;W 索赔的权利。</li>
+        <li><strong>不写</strong>：中国法下默认偏向 anti-sandbagging，所以作为买方必须主动写入 pro-sandbagging 条款，才能保留“知悉后仍可索赔”的权利。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="c-t">③ 特殊赔偿（Special Indemnity）</div>
+      <p>针对特别重大、风险极高的特定事项，单独约定赔偿。它和一般赔偿的逻辑完全不同：核心是<strong>“风险是否发生”</strong>，而非“陈述是否失实”。只要约定的事项发生，买方就可以索赔，不论该风险是交割前还是交割后原因导致的，也不论卖方是否已就该事项做了披露。特殊赔偿的尺度、是否有 cap、起赔点，都视双方谈判而定。典型适用场景：DD 中发现某项重大诉讼、税务争议、知识产权瑕疵，卖方披露了但买方仍担心后续发展，就单独设一条特殊赔偿。</p>
+    </div>
+    <div class="callout callout-warn">
+      <span class="co-t">注 意</span>
+      <p>sandbagging 和特殊赔偿是两个完全不同的概念。sandbagging 管的是“知情后还能不能赔”（通用性权利），特殊赔偿管的是“特定风险发生后能不能赔”（专项约定）。别混为一谈。</p>
+    </div>
+    <p><strong>二、条款联动</strong></p>
+    <ul class="plain">
+      <li><strong>R&amp;W ↔ 赔偿</strong>：R&amp;W 写得越宽，赔偿的触发面越大；但同时赔偿上限和期限限制了实际可索赔的额度。R&amp;W 再宽，赔偿上限太低也白搭。</li>
+      <li><strong>CP ↔ 交割风险</strong>：CP 满足了才能交割，CP 未满足你有权拒绝交割。但 CP 太长可能导致交易黄掉。需要平衡“保护”和“可行性”。</li>
+      <li><strong>保护性条款 ↔ 退出</strong>：你的 veto 权覆盖了“合并分立、变更主业”等事项，这直接影响你能否阻止一个不理想的并购退出方案。保护性条款写得好，退出时你就多了一道否决权。</li>
+      <li><strong>反稀释 ↔ 后续融资</strong>：反稀释条款太激进（如完全棘轮），创始人可能拒绝后续低价融资，导致公司融资困难。加权平均是平衡点。</li>
+    </ul>
+    <p><strong>三、SPA 和 SHA 的冲突处理</strong>：SPA 管交易瞬间，SHA 管长期相处。两个文件之间的冲突以 SHA 为准（因为 SHA 是更持续的关系性文件），但必须在 SHA 中写入冲突条款明确这一点。</p>
+  </div>
+
+  <h5>（三）交割与投后管理（“管”）</h5>
+
+  <div class="dp">
+    <div class="dp-h"><span class="dp-no">决策点 7</span><span class="dp-t">交割</span></div>
+    <p>交割是所有权转移的法律时刻，签合同只是第一步。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:22%">交割类型</th><th style="width:18%">核心内容</th><th>清单重点</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="td-h">并购交割（控股）</span></td>
+            <td>接管公司</td>
+            <td>公章/财务章移交、营业执照/资质证书原件、银行 U 盾和账户控制权、核心团队劳动合同续签、签约到交割间未披露董事会</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">少数股权投资交割</span></td>
+            <td>满足条件 + 打钱</td>
+            <td>CP 已满足（DD 满意、内部审批、政府审批/第三方同意）、付款路径和账户确认、签署版本最终版确认、工商变更材料备齐</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>执行流程：交割条件证明 → 交割确认函 → 付款通知书 → 投资人打款。低年级员工核心任务：逐条核对 CP 是否完成、扫描件是否齐全、签署人是否正确。任何一个条件没确认到位就打钱，后续出问题就是你的锅。</p>
+  </div>
+
+  <div class="dp">
+    <div class="dp-h"><span class="dp-no">决策点 8</span><span class="dp-t">投后重大事项</span></div>
+    <p>信息权是 SHA 中的第一道防线，保护性条款是第二道。</p>
+    <ul class="plain">
+      <li><strong>信息权</strong>：定期获取财务报表和经营数据；连续不提供报表是严重警示信号，须书面催告并保留记录</li>
+      <li><strong>保护性条款定期检查</strong>：章程修改、增减资、合并分立、对外担保、关联交易、对外投资等是否需投资人同意</li>
+    </ul>
+    <p><strong>投后五大高危场景：</strong></p>
+    <ul class="plain">
+      <li>偷偷对外担保（大额担保藏在子公司报表，需逐层穿透）</li>
+      <li>创始人兼职或同业竞争（工商查询关联方、关注精力分配）</li>
+      <li>连续不提供报表（书面催告，口头催促不算数）</li>
+      <li>未经同意的股权变动（定期查工商变更，及时发现）</li>
+      <li>保护性条款被“先斩后奏”（先做工商变更事后才通知）</li>
+    </ul>
+  </div>
+
+  <h5>（四）退出阶段（“退”）</h5>
+  <p>四种退出路径各有约束：</p>
+
+  <div class="card">
+    <div class="c-t">路径一：IPO</div>
+    <ul class="plain">
+      <li><strong>锁定期</strong>：Pre-IPO 轮投资人通常锁定上市后 12 个月，交易所规则定的，不可谈判</li>
+      <li><strong>减持限制</strong>：解禁后不能一次性清仓，大宗交易和集中竞价有节奏和比例限制；持股 5% 以上减持前须公告</li>
+      <li><strong>信息披露</strong>：持股变动出现在公告中，不再是“隐形 LP”</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="c-t">路径二：并购</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:20%">买方类型</th><th style="width:44%">关注重点</th><th>交易特点</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="td-h">MNC/行业龙头</span></td><td>战略收购，看中管线/技术平台补自身布局；深度 DD，尤其关注 IP 权属和 FTO</td><td>倾向 100% 收购，要求长竞业限制和留任协议</td></tr>
+          <tr><td><span class="td-h">国资（央企/国企）</span></td><td>决策链长，受国资委审批、资产评估备案、进场交易约束</td><td>交易确定性低，估值保守</td></tr>
+          <tr><td><span class="td-h">上市公司</span></td><td>发行股份 + 现金收购</td><td>对价含上市公司股票，回报取决于解锁后股价；需关注重大资产重组审核</td></tr>
+          <tr><td><span class="td-h">PE 基金（SBO）</span></td><td>同行接盘，流程快</td><td>出价有天花板（需给 LP 留回报），通常用杠杆</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p><strong>关键权利</strong>：拖售权（Drag-along）——多数股东同意出售时可强制少数股东一起卖，行使需公允价格和善意商业目的；优先购买权（ROFR）——创始人卖股时投资人有优先受让权。</p>
+  </div>
+
+  <div class="card">
+    <div class="c-t">路径三：回购</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:26%">对赌对象</th><th style="width:42%">性质</th><th>实操后果</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="td-h">跟公司对赌</span></td><td>需公司减资程序，股东会 2/3 以上通过</td><td>少数股东极难推动 = 纸上富贵</td></tr>
+          <tr><td><span class="td-h">跟创始人个人对赌</span></td><td>创始人个人承担责任</td><td>有强制执行抓手 = 真金白银</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>创始人通常要求“以股权为限”承担责任——只用其持有的公司股权价值承担对赌责任，不涉及个人名下房产、存款。这是谈判的核心博弈点。</p>
+  </div>
+
+  <div class="card">
+    <div class="c-t">路径四：BD 交易</div>
+    <p>不卖公司整体，卖出某个产品线、技术平台或区域市场权益，实现部分现金回流。常见形式为 License-out（对外许可）：首付款 + 里程碑付款 + 销售提成。</p>
+    <div class="callout callout-warn">
+      <span class="co-t">注 意</span>
+      <p>公司法规定分红前提是公司有可分配利润（弥补亏损 + 提取法定公积金后）。大量研发型公司持续亏损，没有可分配利润，无法直接分红。需提前设计资金回流路径（如老股转让而非分红）。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="c-t">清算优先权</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:16%">模式</th><th style="width:46%">规则</th><th>效果</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="td-h">非参与型</span></td><td>先拿本金，然后要么按持股比例分剩余，要么只留本金——取高者</td><td>“拿回本钱 + 一份回报”的选择权，对创始人相对友好</td></tr>
+          <tr><td><span class="td-h">参与型</span></td><td>先拿本金，然后还按持股比例分剩余（double dip）</td><td>对投资人极度有利，中等价格被收购时与非参与型差距可达数倍</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="callout callout-warn">
+    <span class="co-t">最重要的实操提醒</span>
+    <p>无论手里有什么权利（veto、drag-along、清算优先权），在中国市场环境下，很多权利的执行依赖股东的持续配合。工商变更（增资、减资、股权转让）通常需要全体股东签字同意。权利是后盾，关系是前线。</p>
+  </div>
+
+  <h4>三、为被投企业（目标公司）提供的服务（融资端）</h4>
+  <p>站在创始人/公司立场，核心目标是在拿到投资的同时，最大程度保护公司利益和创始人控制权。</p>
+
+  <p><strong>1. 融资方案设计与协议审查</strong></p>
+  <ul class="plain">
+    <li>协助设计融资方案，匹配投资人类型与估值策略</li>
+    <li>审查 SPA/SHA/TS，剔除或修改对创始人不利条款</li>
+    <li>向创始人解释复杂条款的法律影响：对赌、优先权、反稀释、清算优先权、拖售权等</li>
+  </ul>
+
+  <p><strong>2. 创始人需特别关注的条款</strong></p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:18%">条款</th><th style="width:38%">创始人风险点</th><th>谈判建议</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="td-h">对赌/回购</span></td><td>跟个人对赌可能倾家荡产</td><td>争取以股权为限承担责任，避免无限连带责任</td></tr>
+        <tr><td><span class="td-h">清算优先权</span></td><td>参与型会大幅稀释创始人退出收益</td><td>争取非参与型，限制优先权倍数（1x）</td></tr>
+        <tr><td><span class="td-h">反稀释</span></td><td>完全棘轮对创始人极不利</td><td>争取广义加权平均</td></tr>
+        <tr><td><span class="td-h">保护性条款</span></td><td>veto 事项过多影响公司运营效率</td><td>限定 veto 范围，增加金额/比例门槛</td></tr>
+        <tr><td><span class="td-h">拖售权</span></td><td>可能被迫出售公司</td><td>限定触发条件（如最低价、多数比例）</td></tr>
+        <tr><td><span class="td-h">竞业禁止</span></td><td>限制创始人离职后的发展</td><td>限定范围、期限、地域</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p><strong>3. 交割与投后义务履行</strong></p>
+  <ul class="plain">
+    <li>协助完成内部决策（股东会/董事会决议）、工商变更手续</li>
+    <li>协助履行交割后义务：瑕疵整改、承诺事项履行、董事会改组等</li>
+    <li>协助下一轮融资，处理反稀释、最惠国待遇（MFN）等条款触发</li>
+  </ul>
+
+  <h4>四、为有限合伙人（LP）提供的服务</h4>
+
+  <p><strong>1. 基金合同审查</strong></p>
+  <ul class="plain">
+    <li>审查 LPA，确保基金财产投向合规</li>
+    <li>明确 LP 的知情权、收益分配权、救济途径</li>
+    <li>核查 GP 信义义务条款、管理费/Carry 计算方式、关键人条款等</li>
+  </ul>
+
+  <p><strong>2. 权益维护</strong></p>
+  <ul class="plain">
+    <li>LP 与 GP 争议处理</li>
+    <li>信义义务违反的追责（忠诚义务、注意义务）</li>
+  </ul>
+
+  <p><strong>3. S 基金交易</strong></p>
+  <p>S 基金投资已设立的基金份额或底层项目资产，为私募股权二级市场提供流动性。核心价值是<strong>“赚折扣”而非“赚 alpha”</strong>——优质资产以 NAV 折价 40-50% 出售是常态。</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:22%">交易类型</th><th style="width:38%">核心协议</th><th>特殊关注点</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="td-h">LP 份额转让</span></td>
+          <td>基金份额转让协议、GP 同意函、LPA 修订</td>
+          <td>GP 优先购买权、NAV 调整机制、历史责任切割、Clawback 分担</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">接续基金（GP-led）</span></td>
+          <td>接续基金 LPA、资产转让协议、GP 利益冲突披露及 LP 表决</td>
+          <td>独立估值、LP 表决通过、GP 利益冲突处理</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">底层项目股权</span></td>
+          <td>股权购买协议（SPA）、股东协议修订</td>
+          <td>与普通 PE 投资类似，但需穿透底层资产</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>中国 S 基金市场结构性障碍：国资份额折价转让受限、估值标准不统一、信息披露不足、尽调成本高昂。交易场所以场外谈判为主，北京/上海股权交易中心试点场内转让。</p>
+
+  <h4>五、核心价值总结</h4>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:12%">阶段</th><th style="width:52%">核心法律服务</th><th>关键目标</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="td-h">募</span></td><td>基金架构设计、LPA 起草、中基协备案、LP 适配条款、经济条款设计</td><td>确保基金合法合规运作，GP-LP 利益绑定</td></tr>
+        <tr><td><span class="td-h">投</span></td><td>立项合规审查、NDA/TS 谈判、法律 DD、交易结构设计、SPA/SHA 起草谈判、投决留痕</td><td>风险识别 + 风险分配，确保条款对投资方有利</td></tr>
+        <tr><td><span class="td-h">管</span></td><td>交割条件核查、工商变更、信息权行使、保护性条款监控、五大高危场景应对</td><td>纸面上的权利能落地执行</td></tr>
+        <tr><td><span class="td-h">退</span></td><td>IPO/并购/回购/BD 路径设计、清算优先权、拖售权/ROFR、股东关系维护</td><td>实现投资回报最大化，权利能真正执行</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout callout-key">
+    <span class="co-t">核心原则</span>
+    <p>PE/VC 律师的核心作用在于“法律风险把控”与“商业价值实现”的结合。每个决策都是在做风险分配，律师的任务是确保风险分配的方向对客户有利，且纸面上的权利在实操中能执行。</p>
+  </div>
+</section>
+
+<!-- ============ 1.4 PE/VC 核心术语 ============ -->
+<section class="sec" id="sec-pevc-terms">
+  <h3 class="sec-h"><span class="no">1.4</span>私募股权与风险投资（PE/VC）领域的核心术语</h3>
+
+  <h4>一、角色与资金</h4>
+  <div class="term-grid">
+    <div class="term">
+      <div class="tm-h">GP<span class="tm-en">General Partner · 普通合伙人</span></div>
+      <p>基金管理人，负责基金的募集、投资决策、投后管理及退出，通常出资 1%-5%，承担无限连带责任，收益来源为管理费（每年 1%-2%）+ 业绩报酬（Carry）。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">LP<span class="tm-en">Limited Partner · 有限合伙人</span></div>
+      <p>基金的出资人，不参与日常管理，仅以出资额为限承担有限责任，收益来源为投资回报，通常享有 6%-8% 的门槛收益率。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">FA<span class="tm-en">Financial Advisor · 财务顾问</span></div>
+      <p>为企业融资提供中介服务的机构或个人，负责撮合项目与投资人、梳理商业故事、协调协议交割，通常按融资金额的 1%-5% 收取佣金。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">FOF<span class="tm-en">Fund of Funds · 母基金</span></div>
+      <p>以其他私募股权基金为主要投资标的的基金，通过分散配置多只子基金降低风险，适合追求稳健的机构投资者。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">S 基金<span class="tm-en">Secondary Fund · 私募股权二级市场基金</span></div>
+      <p>专注于私募股权份额二手交易的基金，为原 LP 提供退出渠道，2024 年国内交易规模已达 1078 亿元。</p>
+    </div>
+  </div>
+
+  <h4>二、投资流程</h4>
+  <div class="term-grid">
+    <div class="term">
+      <div class="tm-h">BP<span class="tm-en">Business Plan · 商业计划书</span></div>
+      <p>创业者向投资人展示商业模式、团队、财务预测、融资需求的核心材料，需在 3 分钟内说清“解决什么问题、怎么赚钱、为什么是你”。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">DD<span class="tm-en">Due Diligence · 尽职调查</span></div>
+      <p>投资人对目标企业进行的全面调查，包括财务尽调（FDD）、法律尽调（LDD）、业务尽调等，用于核实企业真实情况、排查风险。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">TS<span class="tm-en">Term Sheet · 投资意向书</span></div>
+      <p>投资人与企业达成的初步投资条款清单，包含估值、投资额、董事会席位等核心条款，不具备法律约束力（保密和排他条款除外）。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">SPA<span class="tm-en">Share Purchase Agreement · 股权认购协议</span></div>
+      <p>投资人与企业签署的正式投资合同，具有法律约束力，签署后投资人打款，完成股权交割。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">IC<span class="tm-en">Investment Committee · 投委会</span></div>
+      <p>基金内部的投资决策委员会，负责审批投资项目，过投委会意味着内部审批通过，可以正式投资。</p>
+    </div>
+  </div>
+
+  <h4>三、估值与收益</h4>
+  <div class="term-grid">
+    <div class="term">
+      <div class="tm-h">估值<span class="tm-en">Valuation</span></div>
+      <p>对企业价值的评估，分为投前估值（投资前企业价值）和投后估值（投前估值 + 本轮投资额），常用方法有市盈率法（P/E）、市销率法（P/S）、现金流折现法等。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">对赌<span class="tm-en">VAM · Valuation Adjustment Mechanism</span></div>
+      <p>投资人与企业约定的业绩承诺条款，若企业未完成约定目标，需通过补偿股份、现金或回购等方式补偿投资人。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">IRR<span class="tm-en">Internal Rate of Return · 内部收益率</span></div>
+      <p>衡量资金时间价值的核心指标，反映基金“赚钱的速度”，头部 PE 基金 IRR 通常可达 20% 以上。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">DPI<span class="tm-en">Distributed to Paid-in Capital · 投入资本分红率</span></div>
+      <p>已分配回报与实缴资本的比值，体现投资人“落袋为安”的收益，DPI&gt;1 意味着已收回本金。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">Carry<span class="tm-en">Carried Interest · 超额收益</span></div>
+      <p>GP 的业绩报酬，基金收益先满足 LP 的门槛收益率（通常 8%），超额部分 GP 提成 20%，剩余归 LP。</p>
+    </div>
+  </div>
+
+  <h4>四、退出与回报</h4>
+  <div class="term-grid">
+    <div class="term">
+      <div class="tm-h">IPO<span class="tm-en">Initial Public Offering · 首次公开募股</span></div>
+      <p>企业首次通过证券交易所向公众公开发行股票并上市，是 PE/VC 最主流的退出方式，通常可获得 10 倍以上回报。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">M&amp;A<span class="tm-en">Mergers and Acquisitions · 并购</span></div>
+      <p>企业通过购买或整合其他公司股权或资产实现退出，通常可获得 3-5 倍回报，是仅次于 IPO 的主流退出方式。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">回购<span class="tm-en">Repurchase</span></div>
+      <p>当企业未完成对赌目标或触发回购条款时，大股东或公司按约定价格买回投资人持有的股份，是投资人的保底退出机制。</p>
+    </div>
+    <div class="term">
+      <div class="tm-h">清算<span class="tm-en">Liquidation</span></div>
+      <p>企业经营失败破产清算，投资人按清算优先权分配剩余资产，通常意味着投资失败，本金亏损。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第二部分 IPO ============ -->
+<div class="part-band" id="part-ipo">
+  <div class="p-no">PART 02&nbsp;</div>
+  <h2>IPO</h2>
+  <p class="p-desc">涵盖 A 股与港股发行条件（我国资本市场体系、A 股发行条件、港股发行条件）、境内企业赴港上市架构（H 股、红筹）、VIE 架构拆除、中概股回归、港交所 IPO 各方主体及职责与知识清单。</p>
+</div>
+
+<section class="sec" id="sec-ipo-overview">
+  <h3 class="sec-h"><span class="no">2.1</span>IPO 概述</h3>
+  <div class="callout callout-key">
+    <span class="co-t">定 义</span>
+    <p>首次公开募股（Initial Public Offering，简称 IPO），是指一家企业或公司首次将其股份向社会公众公开出售的过程。通过这一过程，企业将其部分股权公开发行，从而获得资金用于企业发展，并使其股票在证券交易所或报价系统挂牌交易，成为上市公司。</p>
+  </div>
+</section>
+
+<section class="sec" id="sec-abhk">
+  <h3 class="sec-h"><span class="no">2.2</span>A股与港股</h3>
+
+  <h4 id="sec-abhk-market">2.2.1 我国主要资本市场体系</h4>
+  <p>目前我国证券交易所有三个，包括上海证券交易所、深圳证券交易所、北京证券交易所，其中上交所和深交所是主板市场和科创板市场、北交所原新三板精选层市场。</p>
+
+  <div class="card">
+    <div class="c-t">主板市场，也称为一板市场</div>
+    <p>指传统意义上的证券市场，指一个国家或地区的证券发行，上市及交易的主要场所。中国大陆主板市场的公司在上交所和深交所两个市场上市。主板市场是资本市场中最重要的组成部分，很大程度上能够反映经济发展状况，有<strong>“国民经济晴雨表”</strong>之称。</p>
+    <p>主板市场对发行人的营业期限、股本、大小、盈利水平、最低市值等方面的要求标准较高，上市企业多为大型成熟企业，具有较大的资本规模以及稳定的盈利能力。经营场所为上海证券交易所和深圳证券交易所。</p>
+  </div>
+
+  <div class="card">
+    <div class="c-t">创业板、科创板市场</div>
+    <p><strong>创业板</strong>：在深交所设立创业板指专门协助新兴创新公司特别是高科技公司筹资并进行资本运作的市场。是一个前瞻性市场，注重于公司的发展前景与增长潜力。其上市标准要低于成熟的主板市场；是一个高风险的市场，因此更加注重公司的信息披露。创业板需要投资者对上市公司营业能力自行判断，坚持买者自负原则，对保荐人的专业资格和相关工作经验提出更高要求。以“披露为本”作为监管方式，对信息披露提出全面、及时、准确的严格要求。</p>
+    <p><strong>科创板</strong>：在上交所新设科创板，坚持面向世界科技前沿、面向经济主战场、面向国家重大需求，主要服务于符合国家战略、突破关键核心技术、市场认可度高的科技创新企业。重点支持新一代信息技术、高端装备、新材料、新能源、节能环保以及生物医药等高新技术产业和战略性新兴产业，推动互联网、大数据、云计算、人工智能和制造业深度融合，引领中高端消费，推动质量变革、效率变革、动力变革。</p>
+  </div>
+
+  <div class="card">
+    <div class="c-t">新三板市场，全国中小企业股份转让系统</div>
+    <p>包括基础层和创新层。具有准入门槛比较低，挂牌时间比较短，成本低，成长性好，流动性差等特点。完全独立于上交所和深交所的全国性企业股权交易场所。</p>
+  </div>
+
+  <div class="card">
+    <div class="c-t">区域性股权交易市场</div>
+    <p>是为特定区域内的企业提供股权、债券的转让和融资服务的私募市场，是我国多层次资本市场的重要组成部分。对于促进企业特别是中小微企业股权交易和融资，鼓励科技创新和激活民间资本，加强对实体经济薄弱环节的支持等具有积极作用。</p>
+  </div>
+
+  <h4 id="sec-abhk-a">2.2.2 A股发行条件</h4>
+  <p>A 股市场已形成由主板、科创板、创业板、北交所组成的多层次资本市场体系，各板块定位清晰，分别服务于不同发展阶段和行业属性的企业。</p>
+
+  <p><strong>1. A 股四大板块核心上市标准对比</strong></p>
+
+  <div class="card">
+    <div class="c-t">（1）主板（上交所 / 深交所）</div>
+    <p>定位：大盘蓝筹企业，业务模式成熟、经营业绩稳定的行业龙头。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>指标</th><th>标准一：盈利+现金流</th><th>标准二：市值 + 收入 + 利润</th><th>标准三：最大市值标准</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="td-h">最低市值</span></td>
+            <td>-</td>
+            <td>50 亿元</td>
+            <td>100 亿元</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">总盈利</span></td>
+            <td>最近 3 年净利润均为正<br>最近三年净利润累计≥2 亿元</td>
+            <td>最近一年净利润为正<br>最近一年净利润≥1 亿元</td>
+            <td>最近一年净利润为正</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">经营现金流 / 收入</span></td>
+            <td>最近 3 年经营现金流净额累计≥2 亿元<br>或营业收入累计≥15 亿元</td>
+            <td>最近一年营业收入≥6 亿元<br>最近 3 年经营现金流净额累计≥2.5 亿元</td>
+            <td>最近一年营业收入≥10 亿元</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">股份数额</span></td>
+            <td colspan="3">发行后股份总数≥5000 万股</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="c-t">（2）科创板（上交所）</div>
+    <p>定位：硬科技企业，面向世界科技前沿、经济主战场、国家重大需求。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>指标</th><th>标准一：利润型</th><th>标准二：收入 + 研发</th><th>标准三：收入 + 现金流</th><th>标准四：收入型</th><th>标准五：未盈利科技企业</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="td-h">最低市值</span></td>
+            <td>10 亿元</td><td>15 亿元</td><td>20 亿元</td><td>30 亿元</td><td>40 亿元</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">盈利要求</span></td>
+            <td>最近两年净利润均 &gt; 5000 万<br>或最近一年净利润 &gt; 1 亿元</td>
+            <td>-</td><td>-</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">收入要求</span></td>
+            <td>-</td>
+            <td>最近一年≥2 亿元</td>
+            <td>最近一年≥3 亿元</td>
+            <td>最近一年≥3 亿元</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">经营现金流</span></td>
+            <td>-</td><td>-</td>
+            <td>最近三年≥1 亿元</td>
+            <td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">研发要求</span></td>
+            <td>-</td>
+            <td>最近三年研发投入占比≥15%</td>
+            <td>-</td>
+            <td>-</td>
+            <td>主要业务或产品需经国家有关部门批准，市场空间大，目前已取得阶段性成果。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="c-t">（3）创业板（深交所）</div>
+    <p>定位：成长型创新创业企业，支持传统产业与新技术、新产业、新业态、新模式深度融合。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>指标</th><th>标准一：盈利型</th><th>标准二：市值+收入+利润</th><th>标准三：高市值收入性</th><th>标准四：市值+收入+增长率</th><th>标准五：市值+收入+研发投入</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="td-h">最低市值</span></td>
+            <td>-</td><td>15 亿元</td><td>50 亿元</td><td>30 亿元</td><td>40 亿元</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">盈利要求</span></td>
+            <td>最近两年净利润均为正<br>累计≥1 亿元</td>
+            <td>最近一年净利润为正<br>最近一年净利润≥6000 万元</td>
+            <td>-</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">收入要求</span></td>
+            <td>-</td><td>营业收入≥4 亿元</td>
+            <td>最近一年≥3 亿元</td>
+            <td>最近一年≥2 亿元</td>
+            <td>最近一年≥2 亿元</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">其他要求</span></td>
+            <td>-</td><td>-</td><td>-</td>
+            <td>最近三年营收复合增长率≥30%</td>
+            <td>最近三年研发投入占比≥15%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="c-t">（4）北交所</div>
+    <p>定位：创新型中小企业，重点支持先进制造业和现代服务业等领域的企业。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>指标</th><th>标准一：盈利型</th><th>标准二：收入 + 利润</th><th>标准三：收入 + 现金流</th><th>标准四：成长 / 研发型</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="td-h">最低市值</span></td>
+            <td>2 亿元</td><td>4 亿元</td><td>8 亿元</td><td>15 亿元</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">盈利要求</span></td>
+            <td>最近两年净利润均≥1500 万元且 ROE≥8%<br>或最近一年净利润≥2500 万元且 ROE≥8%</td>
+            <td>-</td><td>-</td><td>-</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">收入要求</span></td>
+            <td>-</td>
+            <td>最近两年平均≥1 亿元<br>且最近一年增长率≥30%</td>
+            <td>最近一年≥2 亿元</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">经营现金流</span></td>
+            <td>-</td>
+            <td>最近一年为正</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">研发要求</span></td>
+            <td>-</td>
+            <td>-</td>
+            <td>最近两年研发投入占比≥8%</td>
+            <td>最近两年研发投入合计≥5000 万元</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p><strong>2. A 股各板块共性要求</strong></p>
+  <ul class="plain">
+    <li><strong>公众持股</strong>：公开发行股份达到公司股份总数的 25% 以上；公司股份总数超过 4 亿股的，公开发行股份的比例为 10% 以上。</li>
+    <li><strong>管理层持续性</strong>：最近三年内主营业务和董事、高级管理人员均没有发生重大不利变化。</li>
+    <li><strong>所有权持续性</strong>：最近二年（科创板 / 创业板 / 北交所）或三年（主板）实际控制人没有发生变更。</li>
+  </ul>
+
+  <p><strong>3. 特殊企业发行条件：红筹与同股不同权</strong></p>
+  <p>随着资本市场改革的深入，A 股和港股都对红筹企业和同股不同权（WVR）企业开放了上市通道，满足了不同类型企业的上市需求。</p>
+
+  <div class="card">
+    <div class="c-t">红筹企业 A 股发行要求</div>
+    <p>红筹企业是指注册地在境外、主要经营活动在境内的企业。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:20%">企业类型</th><th>已在境外上市的红筹企业</th><th>未在境外上市的红筹企业</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="td-h">最低市值</span></td>
+            <td>2000 亿元<br>或 200 亿元（科技创新能力较强）</td>
+            <td>200 亿元<br>或 100 亿元<br>或 50 亿元</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">收入要求</span></td>
+            <td>-</td>
+            <td>最近一年≥30 亿元<br>或营业收入快速增长<br>或最近一年≥5 亿元</td>
+          </tr>
+          <tr>
+            <td><span class="td-h">特殊要求</span></td>
+            <td>拥有自主研发、国际领先技术，在同行业竞争中处于相对优势地位</td>
+            <td>营业收入快速增长标准：<br>1. 最近一年≥5 亿元，近三年复合增长率≥10%<br>2. 最近一年 &lt; 5 亿元，近三年复合增长率≥20%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="c-t">同股不同权（WVR）企业发行要求</div>
+    <p>同股不同权架构允许企业创始人及其团队在上市后仍能保持对公司的控制权。</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>上市地</th><th>板块</th><th>标准</th><th>最低市值</th><th>其他要求</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A 股</td><td>主板</td><td>市值 + 盈利</td><td>200 亿元</td><td>最近一年净利润为正</td></tr>
+          <tr><td>A 股</td><td>主板</td><td>市值 + 盈利 + 营业</td><td>100 亿元</td><td>最近一年净利润为正<br>最近一年营业收入≥10 亿元</td></tr>
+          <tr><td>A 股</td><td>科创板 / 创业板</td><td>市值</td><td>100 亿元</td><td>-</td></tr>
+          <tr><td>A 股</td><td>科创板 / 创业板</td><td>市值 + 营业</td><td>50 亿元</td><td>最近一年营业收入≥5 亿元</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h4 id="sec-abhk-hk">2.2.3 港股发行条件</h4>
+  <p>香港联交所设有主板和 GEM（创业板），主板要求更严格。</p>
+
+  <div class="card">
+    <div class="c-t">主板上市核心条件</div>
+    <p><strong>财务要求（满足以下三者之一）：</strong></p>
+    <ul class="plain">
+      <li><strong>盈利测试</strong>：过去三年净利润≥8,000 万港元（第一年≥3,500 万，前两年累计≥4,500 万）。</li>
+      <li><strong>市值/收入测试</strong>：上市时市值≥40 亿港元，且最近一年收入≥5 亿港元。</li>
+      <li><strong>市值/收入/现金流测试</strong>：上市时市值≥20 亿港元，最近一年收入≥5 亿港元，前三年累计现金流≥1 亿港元。</li>
+    </ul>
+    <p><strong>市值与公众持股：</strong></p>
+    <ul class="plain">
+      <li>上市时市值至少 5 亿港元。</li>
+      <li>公众持股比例≥25%（市值超 100 亿港元可降至 15%），股东不少于 300 人。</li>
+      <li>公众持股最高 3 名合计不得≥50%（主板及 GEM）。</li>
+    </ul>
+    <p><strong>营业记录与管理：</strong></p>
+    <ul class="plain">
+      <li>至少 3 个完整财年的营业记录。</li>
+      <li>管理层近三年基本不变，控制权近一年稳定。</li>
+    </ul>
+    <p><strong>合规与治理：</strong></p>
+    <ul class="plain">
+      <li>符合《上市规则》及公司治理要求（如独董、审计委员会）。</li>
+      <li>披露完整的业务、风险、财务信息。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="c-t">GEM（创业板）核心条件</div>
+    <ul class="plain">
+      <li><strong>财务要求</strong>：最近两个财年现金流合计≥3,000 万港元，无盈利要求。</li>
+      <li><strong>市值</strong>：上市时至少 1.5 亿港元。</li>
+      <li><strong>营业记录</strong>：至少 2 个完整财年。</li>
+      <li><strong>公众持股</strong>：比例≥25%，股东不少于 100 人。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="c-t">其他共通要求</div>
+    <ul class="plain">
+      <li><strong>业务可持续性</strong>：主营业务明确且具可持续性。</li>
+      <li><strong>合规运营</strong>：符合香港及注册地的法律法规。</li>
+      <li><strong>招股书披露</strong>：全面披露信息并通过联交所审阅。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="c-t">18A 和 18C 章上市</div>
+    <p><strong>18A（2018 年生效）</strong>：专门为生物科技公司设计，允许无收入、无盈利的公司在主板上市。</p>
+    <p><strong>18C（2023 年生效）</strong>：为特专科技公司（包括新一代信息技术、先进硬件、新材料、新能源及节能环保、新食品及农业技术等五大行业）设计，允许无盈利的公司上市，但有一定收入门槛要求。</p>
+  </div>
+
+  <div class="card">
+    <div class="c-t">18A：未盈利生物科技公司上市</div>
+    <p><strong>目标公司</strong>：主要从事生物科技产品（生物制剂、小分子药物、医疗器械等）研发、应用或商业化的公司。</p>
+    <p><strong>核心条件：</strong></p>
+    <ul class="plain">
+      <li><strong>行业属性</strong>：必须从事生物科技，且核心产品研发至少有一项已通过概念阶段（如已完成 I 期临床试验，或已获药监部门批准进入 II 期/III 期试验）。</li>
+      <li><strong>财务要求</strong>：不设最低盈利或收入要求。但需满足“市值/收益测试”或“市值/收益/现金流测试”中的一项（通常适用前者，即上市时市值≥15 亿港元）。</li>
+      <li><strong>上市时市值</strong>：至少 15 亿港元，公众持股至少 3.75 亿港元。</li>
+    </ul>
+    <p><strong>研发与运营：</strong></p>
+    <ul class="plain">
+      <li>拥有核心产品至少 12 个月。</li>
+      <li>拥有与其核心产品相关的已注册专利、专利申请及/或知识产权。</li>
+      <li>具备相当规模的研发开支，以证明其研发能力。</li>
+      <li><strong>营运资金</strong>：上市前 12 个月内得到至少一名资深投资者的相当数额投资，且至上市时仍未撤资。运营资金可应付由上市文件刊发之日起至少 12 个月开支的 125%。</li>
+      <li><strong>管理层经验</strong>：具备与其业务规模相匹配的资深管理团队和丰富的研发经验。</li>
+      <li><strong>公众持股</strong>：公众持股比例至少 25%，且上市时股东不少于 300 人。</li>
+    </ul>
+    <div class="callout callout-key">
+      <span class="co-t">核心特点</span>
+      <p>“研发驱动”和“资深投资者背书”。重点看产品管线的科学价值和临床进展，而非当期财务表现。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="c-t">18C：特专科技公司上市</div>
+    <p><strong>目标公司</strong>：从事前沿技术领域研发、商业化或销售的公司，属于五大行业：新一代信息技术、先进硬件、先进材料、新能源及节能环保、新食品及农业技术。</p>
+    <p><strong>核心条件（分两类）：</strong></p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:26%">条件类别</th><th>已商业化公司</th><th>未商业化公司</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="td-h">定义</span></td><td>经审计年收入 ≥ 2.5 亿港元</td><td>经审计年收入 &lt; 2.5 亿港元</td></tr>
+          <tr><td><span class="td-h">预期市值</span></td><td>上市时 ≥ 60 亿港元</td><td>上市时 ≥ 100 亿港元</td></tr>
+          <tr><td><span class="td-h">收入要求</span></td><td>最近一个会计年度 ≥ 2.5 亿港元</td><td>无要求，但需展示实现商业化的可信路径</td></tr>
+          <tr><td><span class="td-h">研发开支比例</span></td><td>前三个会计年度，每年 ≥ 15%</td><td>前三个会计年度，每年 ≥ 50%</td></tr>
+          <tr><td><span class="td-h">第三方投资</span></td><td colspan="2">上市前至少 12 个月，已获得来自领航资深独立投资者相当数额的投资，并且至上市时仍持有≥10% 的已发行股本。（这是关键门槛）</td></tr>
+          <tr><td><span class="td-h">商业化路径</span></td><td colspan="2">展示并在上市文件中披露实现商业化及达到收入门槛的可信路径。</td></tr>
+          <tr><td><span class="td-h">运营历史</span></td><td colspan="2">上市前已在现有管理层领导下经营 ≥ 3 个会计年度。</td></tr>
+          <tr><td><span class="td-h">公众持股</span></td><td colspan="2">至少 25%。若市值超过 100 亿港元，联交所可接受 15% 至 25%。</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout callout-key">
+      <span class="co-t">核心特点</span>
+      <p>“高市值门槛”和“领航资深投资者重度参与”。对未商业化公司的要求更为严格，强调其技术领先性和未来实现收入的清晰规划。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="c-t">对比总结</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:22%">特性</th><th>18A 章（生物科技）</th><th>18C 章（特专科技）</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="td-h">适用行业</span></td><td>生物科技（制药、医疗器械等）</td><td>五大特专科技行业（AI、芯片、新能源等）</td></tr>
+          <tr><td><span class="td-h">财务门槛</span></td><td>无最低收入要求</td><td>有最低收入门槛（2.5 亿港元）或更高市值要求</td></tr>
+          <tr><td><span class="td-h">核心验证</span></td><td>研发里程碑（如临床试验阶段）</td><td>第三方投资验证（领航资深投资者持股）</td></tr>
+          <tr><td><span class="td-h">市值要求</span></td><td>至少 15 亿港元</td><td>60 亿或 100 亿港元，要求更高</td></tr>
+          <tr><td><span class="td-h">关键概念</span></td><td>概念阶段、资深投资者</td><td>已/未商业化、领航资深独立投资者</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2.3 境内企业赴港上市架构 ============ -->
+<section class="sec" id="sec-hk-arch">
+  <h3 class="sec-h"><span class="no">2.3</span>境内企业赴港上市架构（H股、红筹）</h3>
+
+  <h4>一、H股架构</h4>
+  <p>在中国境内注册的股份有限公司，直接向中国证监会申请，获得批准后，以该境内股份有限公司为主体，向香港联交所申请发行境外上市外资股（H股）并上市。</p>
+  <figure class="diagram">
+    <pre class="mermaid" data-processed="true"><svg id="mermaid-1792727762180" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="flowchart" style="max-width: 847.7265625px;" viewBox="0 0 847.7265625 233" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#mermaid-1792727762180{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#000000;}#mermaid-1792727762180 .error-icon{fill:#552222;}#mermaid-1792727762180 .error-text{fill:#552222;stroke:#552222;}#mermaid-1792727762180 .edge-thickness-normal{stroke-width:1px;}#mermaid-1792727762180 .edge-thickness-thick{stroke-width:3.5px;}#mermaid-1792727762180 .edge-pattern-solid{stroke-dasharray:0;}#mermaid-1792727762180 .edge-thickness-invisible{stroke-width:0;fill:none;}#mermaid-1792727762180 .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-1792727762180 .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-1792727762180 .marker{fill:#666;stroke:#666;}#mermaid-1792727762180 .marker.cross{stroke:#666;}#mermaid-1792727762180 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-1792727762180 p{margin:0;}#mermaid-1792727762180 .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#000000;}#mermaid-1792727762180 .cluster-label text{fill:#333;}#mermaid-1792727762180 .cluster-label span{color:#333;}#mermaid-1792727762180 .cluster-label span p{background-color:transparent;}#mermaid-1792727762180 .label text,#mermaid-1792727762180 span{fill:#000000;color:#000000;}#mermaid-1792727762180 .node rect,#mermaid-1792727762180 .node circle,#mermaid-1792727762180 .node ellipse,#mermaid-1792727762180 .node polygon,#mermaid-1792727762180 .node path{fill:#eee;stroke:#999;stroke-width:1px;}#mermaid-1792727762180 .rough-node .label text,#mermaid-1792727762180 .node .label text,#mermaid-1792727762180 .image-shape .label,#mermaid-1792727762180 .icon-shape .label{text-anchor:middle;}#mermaid-1792727762180 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#mermaid-1792727762180 .rough-node .label,#mermaid-1792727762180 .node .label,#mermaid-1792727762180 .image-shape .label,#mermaid-1792727762180 .icon-shape .label{text-align:center;}#mermaid-1792727762180 .node.clickable{cursor:pointer;}#mermaid-1792727762180 .root .anchor path{fill:#666!important;stroke-width:0;stroke:#666;}#mermaid-1792727762180 .arrowheadPath{fill:#333333;}#mermaid-1792727762180 .edgePath .path{stroke:#666;stroke-width:2.0px;}#mermaid-1792727762180 .flowchart-link{stroke:#666;fill:none;}#mermaid-1792727762180 .edgeLabel{background-color:white;text-align:center;}#mermaid-1792727762180 .edgeLabel p{background-color:white;}#mermaid-1792727762180 .edgeLabel rect{opacity:0.5;background-color:white;fill:white;}#mermaid-1792727762180 .labelBkg{background-color:rgba(255, 255, 255, 0.5);}#mermaid-1792727762180 .cluster rect{fill:hsl(0, 0%, 98.9215686275%);stroke:#707070;stroke-width:1px;}#mermaid-1792727762180 .cluster text{fill:#333;}#mermaid-1792727762180 .cluster span{color:#333;}#mermaid-1792727762180 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(-160, 0%, 93.3333333333%);border:1px solid #707070;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-1792727762180 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#000000;}#mermaid-1792727762180 rect.text{fill:none;stroke-width:0;}#mermaid-1792727762180 .icon-shape,#mermaid-1792727762180 .image-shape{background-color:white;text-align:center;}#mermaid-1792727762180 .icon-shape p,#mermaid-1792727762180 .image-shape p{background-color:white;padding:2px;}#mermaid-1792727762180 .icon-shape rect,#mermaid-1792727762180 .image-shape rect{opacity:0.5;background-color:white;fill:white;}#mermaid-1792727762180 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="mermaid-1792727762180_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1792727762180_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1792727762180_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-1792727762180_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="mermaid-1792727762180_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="mermaid-1792727762180_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M178.635,55L190.098,49.167C201.56,43.333,224.485,31.667,262.26,25.833C300.035,20,352.66,20,408.883,20C465.107,20,524.928,20,573.293,30.015C621.658,40.031,658.566,60.061,677.02,70.077L695.473,80.092" id="L_A_B_0" class=" edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="" marker-end="url(#mermaid-1792727762180_flowchart-v2-pointEnd)"></path><path d="M156.529,133L171.676,143.833C186.823,154.667,217.116,176.333,246.242,187.167C275.368,198,303.327,198,317.306,198L331.285,198" id="L_A_C_1" class=" edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="" marker-end="url(#mermaid-1792727762180_flowchart-v2-pointEnd)"></path><path d="M475.285,198L493.529,198C511.773,198,548.262,198,584.96,187.985C621.658,177.969,658.566,157.939,677.02,147.923L695.473,137.908" id="L_C_B_2" class=" edge-thickness-normal edge-pattern-dotted edge-thickness-normal edge-pattern-solid flowchart-link" style="" marker-end="url(#mermaid-1792727762180_flowchart-v2-pointEnd)"></path><path d="M196,94L204.568,94C213.137,94,230.273,94,246.743,94C263.214,94,279.017,94,286.919,94L294.82,94" id="L_A_D_3" class=" edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style="" marker-end="url(#mermaid-1792727762180_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel" transform="translate(405.28515625, 20)"><g class="label" transform="translate(-84.46484375, -12)"><foreignObject width="168.9296875" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel "><p>② 发行 H 股（外资股）</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(247.41015625, 198)"><g class="label" transform="translate(-26.41015625, -12)"><foreignObject width="52.8203125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel "><p>③ 备案</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(584.75, 198)"><g class="label" transform="translate(-48, -12)"><foreignObject width="96" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel "><p>双重监管备案</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel "></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default  " id="flowchart-A-12" transform="translate(102, 94)"><rect class="basic label-container" style="fill:#1e3a6e !important;stroke:#1e3a6e !important" x="-94" y="-39" width="188" height="78"></rect><g class="label" style="color:#ffffff !important" transform="translate(-64, -24)"><rect></rect><foreignObject width="128" height="48"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#ffffff !important" class="nodeLabel "><p>境内股份有限公司<br>（上市主体本身）</p></span></div></foreignObject></g></g><g class="node default  " id="flowchart-B-13" transform="translate(748.73828125, 109)"><rect class="basic label-container" style="fill:#b08d3e !important;stroke:#b08d3e !important" x="-90.98828125" y="-27" width="181.9765625" height="54"></rect><g class="label" style="color:#ffffff !important" transform="translate(-60.98828125, -12)"><rect></rect><foreignObject width="121.9765625" height="24"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#ffffff !important" class="nodeLabel "><p>香港联交所 HKEX</p></span></div></foreignObject></g></g><g class="node default  " id="flowchart-C-15" transform="translate(405.28515625, 198)"><rect class="basic label-container" style="fill:#5d6b80 !important;stroke:#5d6b80 !important" x="-70" y="-27" width="140" height="54"></rect><g class="label" style="color:#ffffff !important" transform="translate(-40, -12)"><rect></rect><foreignObject width="80" height="24"><div style="color: rgb(255, 255, 255) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#ffffff !important" class="nodeLabel "><p>中国证监会</p></span></div></foreignObject></g></g><g class="node default  " id="flowchart-D-19" transform="translate(405.28515625, 94)"><rect class="basic label-container" style="fill:#ffffff !important;stroke:#5d6b80 !important" x="-106.46484375" y="-27" width="212.9296875" height="54"></rect><g class="label" style="color:#1c2739 !important" transform="translate(-76.46484375, -12)"><rect></rect><foreignObject width="152.9296875" height="24"><div style="color: rgb(28, 39, 57) !important; display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;" xmlns="http://www.w3.org/1999/xhtml"><span style="color:#1c2739 !important" class="nodeLabel "><p>④ 内资股与 H 股并存</p></span></div></foreignObject></g></g></g></g></g></svg></pre>
+    <figcaption>图 2-1　H 股架构：境内股份公司直接赴港发行境外上市外资股</figcaption>
+  </figure>
+  <p><strong>适用</strong>：制造业、消费类企业、国有企业，或业务主要集中于境内且无外资引入需求的企业。</p>
+  <p>境内股份有限公司（上市主体本身）→ ② 直接向港交所（HKEX）发行 H 股（外资股）→ ③ 证监会+港交所双重监管备案后上市 → ④ 内资股和 H 股并存。</p>
+
+  <h4>二、红筹架构</h4>
+  <p>指境内创始团队在开曼、BVI、香港等离岸地设立境外控股主体，以境外公司作为融资或上市载体，将境内经营实体收益合并至境外主体，实现境外资本运作。</p>
+  <p><strong>适用</strong>：互联网、生物医药、科技领域企业，或处于外资准入受限领域且需对接国际资本的企业。</p>
+
+  <h5>（一）股权红筹</h5>
+  <p>境外上市主体 → 香港子公司 → 境内 WFOE 外商独资企业，WFOE 直接持有境内运营公司股权。</p>
+
+  <h5>（二）VIE 架构</h5>
+  <div class="chain">
+    <div class="ch-item">
+      <div class="ch-rank"><b>BVI</b>公司</div>
+      <div class="ch-body">
+        <div class="ch-t">持股平台</div>
+        <div class="ch-d">创始人、员工期权平台、投资人，分别设立 BVI 公司，共同持股；BVI 的公司法规较灵活，注册和管理成本相对较低，而且具有较强的隐私保护。便于股权流转、隐私隔离。</div>
+      </div>
+    </div>
+    <div class="ch-arrow">↓ 控股</div>
+    <div class="ch-item">
+      <div class="ch-rank"><b>开曼</b>公司</div>
+      <div class="ch-body">
+        <div class="ch-t">上市主体</div>
+        <div class="ch-d">整个红筹架构的核心，是融资和上市的主体。开曼群岛的公司法律制度成熟且稳定，适合复杂的股权结构，便于资本运作、股权激励。</div>
+      </div>
+    </div>
+    <div class="ch-arrow">↓ 控股</div>
+    <div class="ch-item">
+      <div class="ch-rank"><b>香港</b>子公司</div>
+      <div class="ch-body">
+        <div class="ch-t">返程投资直接主体</div>
+        <div class="ch-d">香港公司通常作为返程投资的直接主体。因为香港和中国大陆之间的跨境预提税最低，可根据相关税收协定（安排）享受 5% 的预提所得税优惠税率。</div>
+      </div>
+    </div>
+    <div class="ch-arrow">↓ 控股</div>
+    <div class="ch-item">
+      <div class="ch-rank"><b>WFOE</b></div>
+      <div class="ch-body">
+        <div class="ch-t">境内核心履约主体</div>
+        <div class="ch-d">境内 WFOE 外商独资企业，是整个 VIE 架构的境内核心履约主体。</div>
+      </div>
+    </div>
+    <div class="ch-arrow">↓ VIE 一揽子协议</div>
+    <div class="ch-item">
+      <div class="ch-rank"><b>OPCO</b></div>
+      <div class="ch-body">
+        <div class="ch-t">境内运营公司</div>
+        <div class="ch-d">实际运营主体，持 ICP 许可证、SP 许可证、互联网新闻信息服务许可证等牌照。</div>
+      </div>
+    </div>
+  </div>
+
+  <h4>（三）H股架构和红筹架构的核心对比</h4>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:16%">对比维度</th><th style="width:42%">H股架构</th><th>红筹架构</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="td-h">监管审核</span></td>
+          <td>实行双重审核机制：需完成中国证监会备案（法定周期 20 个工作日）及港交所聆讯，对教育培训、文化娱乐等特定行业存在上市限制</td>
+          <td>实行单一审核机制：仅需通过港交所合规审查；其中 VIE 架构需符合外资政策导向（2024 年修订的《外商投资法实施条例》已对此作出明确规定）</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">上市周期</span></td>
+          <td>通常为 6-8 个月，受政策不确定性影响可能延长周期，特定限制类行业需履行额外审批程序</td>
+          <td>通常为 9-12 个月（含架构搭建、37 号文登记、ODI 备案等流程），整体流程规范性与透明度更高</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">行业适配</span></td>
+          <td>适用于传统行业（含国有企业、制造业、消费类企业），以合规性为首要考量</td>
+          <td>适用于新经济领域（互联网、生物医药、科技企业），需开展境外融资或规避特定领域外资准入限制的企业优先选择</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">流动性与锁定期</span></td>
+          <td>内资股锁定期为 3 年，内资股实现全流通需履行审批程序（周期约 3-6 个月）</td>
+          <td>控股股东锁定期为 6 个月，股权全流通无额外限制，支持通过境外协议转让方式退出</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">税务成本</span></td>
+          <td>境内主体向境外股东分红时，需代扣 10% 预提所得税；部分国家（地区）可依据税收协定享受优惠税率，例如与新加坡签订的税收协定中预提所得税税率为 5%</td>
+          <td>开曼群岛、BVI 等离岸上市主体无直接税负，香港子公司分红需缴纳 10% 利得税，可通过合理税务规划优化跨境税负</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">后续融资</span></td>
+          <td>再融资需履行境内外联动审批程序，例如增发股份需经中国证监会与港交所双重审批</td>
+          <td>可直接发行可转债、优先股等融资工具，支持分拆子公司在境外上市</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 2.4 VIE 架构拆除 ============ -->
+<section class="sec" id="sec-vie-remove">
+  <h3 class="sec-h"><span class="no">2.4</span>VIE 架构拆除</h3>
+
+  <h4>一、拆除路径</h4>
+  <div class="steps">
+    <div class="step">
+      <div class="s-t">步骤一：内部决策批准拆除</div>
+      <p>拆红筹通常属于外部投资人享有一票否决权的事项，首先需要依境外融资主体的章程性文件规定，通过股东会决议批准，签署重组框架协议，明确拆除流程、权利义务分配及境内拟上市主体。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">步骤二：确定境内融资/上市主体</div>
+      <p>综合考量后续上市发行条件、重组成本、持续经营时间、业务整合情况、控制权稳定等因素。在股权控制模式下，境内主体通常为 WFOE；在 VIE 模式下，可选择 WFOE 或 OPCO 作为拟上市主体。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">步骤三：终止 VIE 协议（针对 VIE 架构）</div>
+      <p>由 WFOE 与 OPCO 解除全套控制协议，包括独家技术咨询与服务协议、股权质押协议、投票权委托协议、独家购买权协议等。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">步骤四：股东权益回归</div>
+      <p>创始股东通过股权转让或增资方式取得 WFOE 控制权，投资人根据其选择通过回购退出或权益平移至境内持股，ESOP 平台回归境内持股。境内受让方股东自境外持股平移至境内持股时，股份对价豁免支付或按零对价转让系常规做法。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">步骤五：境外股份回购与资金流转</div>
+      <p>开曼公司回购投资人及创始人股权，完成资金闭环。境外投资人以回购价款向境内主体增资或受让股权。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">步骤六：境外架构清理</div>
+      <p>注销开曼公司、BVI 公司、香港公司等境外主体，完成境外公司注册信息变更及税务清算。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">步骤七：37 号文注销登记</div>
+      <p>相关自然人办理外汇注销登记，确保外汇合规闭环完整。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">步骤八：资产与业务整合</div>
+      <p>确保拟上市主体业务独立性，整合人员、核心技术团队、业务合同及资产，为后续上市申报奠定基础。</p>
+    </div>
+  </div>
+
+  <h4>二、拆 VIE 注意事项</h4>
+  <div class="card">
+    <div class="c-t">税务成本高</div>
+    <ul class="plain">
+      <li>境外股权转让通常需缴纳 10% 企业所得税（非居民企业）</li>
+      <li>若以低价转让，税务局可能按公允价值核定纳税</li>
+      <li>递延纳税政策适用条件严格，需与主管税务机关充分沟通</li>
+      <li>建议提前 6-12 个月与税务律师共同制定税务筹划方案</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="c-t">资金安排复杂</div>
+    <ul class="plain">
+      <li>境内收购需大量资金（通常数千万至数亿元）</li>
+      <li>可通过境内融资、股东出资、股权融资等方式筹集</li>
+      <li>涉及外汇资金出入境须符合国家外汇管理局规定</li>
+      <li>资金来源须合法，确保无洗钱嫌疑，保留完整资金证明</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="c-t">时间周期较长</div>
+    <ul class="plain">
+      <li>整个拆 VIE 流程通常需要 12-24 个月</li>
+      <li>注销境外公司 + 外汇备案 + 工商变更，每个环节均有时间消耗</li>
+      <li>需要提前规划，避免拆 VIE 节奏与上市时间窗口错位</li>
+    </ul>
+  </div>
+  <div class="card">
+    <div class="c-t">合规历史审查</div>
+    <ul class="plain">
+      <li>上市申请时，证监会/交易所将对重组历史进行全面审查</li>
+      <li>VIE 期间的税务合规、外汇备案、关联交易是审查重点</li>
+      <li>需梳理并补缴历史遗留的税款、滞纳金等问题</li>
+      <li>涉及股权代持、利润转移的历史需全面清理，不留隐患</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 2.5 中概股回归 ============ -->
+<section class="sec" id="sec-cnr-return">
+  <h3 class="sec-h"><span class="no">2.5</span>中概股回归</h3>
+
+  <div class="card">
+    <div class="c-t">01 私有化退市</div>
+    <ul class="plain">
+      <li><strong>步骤</strong>：控股股东发出要约 → 少数股东投票 → 美股退市 → 赴港重新 IPO</li>
+      <li><strong>成本</strong>：最高（需溢价回购所有流通股，通常溢价 20-40%）</li>
+      <li><strong>适用</strong>：估值严重低估、流动性极差的中概股</li>
+      <li><strong>典型案例</strong>：奇虎360、中国化学纤维</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="c-t">02 二次上市</div>
+    <ul class="plain">
+      <li><strong>步骤</strong>：向港交所申请二次上市 → 增发 H 股 → 同时在美港两地交易</li>
+      <li><strong>成本</strong>：中等（仅增发融资，美股继续挂牌）</li>
+      <li><strong>适用</strong>：优质大型中概股，快速回归港股</li>
+      <li><strong>典型案例</strong>：阿里巴巴(2019)、京东(2020)、网易(2020)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="c-t">03 双重主要上市</div>
+    <ul class="plain">
+      <li><strong>步骤</strong>：向港交所申请主要上市 → 满足两地完全合规 → 平行上市</li>
+      <li><strong>成本</strong>：最高（须同时满足两地全部上市规则）</li>
+      <li><strong>优势</strong>：纳入港股通、上市地位平等、可单独在港退市</li>
+      <li><strong>典型案例</strong>：小鹏汽车、理想汽车、哔哩哔哩</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 2.6 港交所IPO各方主体及职责 ============ -->
+<section class="sec" id="sec-hkex-roles">
+  <h3 class="sec-h"><span class="no">2.6</span>港交所IPO各方主体及职责</h3>
+
+  <p>港交所 IPO 涉及多方协作，主要包括以下主体：</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="s-t">发行人</div>
+      <p>拟上市企业，是 IPO 的主体，负责提供真实准确的财务与业务信息，确定融资目标与估值预期，配合各参与方开展相关工作。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">保荐人（Sponsor）</div>
+      <p>核心协调者，负责对发行人进行尽职调查、协助重组架构、撰写招股书、与港交所沟通，并对上市合规性承担首要责任（通常由知名投资银行或券商担任，是 IPO 过程中的核心角色，需为港交所所认可的持牌券商）。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">承销团</div>
+      <p>通常由保荐人兼任或联合其他券商，负责股票的承销工作，通过路演推介等方式向投资者推销股票，确定发行价格和发行数量，确保股票能够顺利发行并完成募资。通常由国际大投行或中资券商组成。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">律师事务所</div>
+      <p>包括发行人律师（处理境内/境外法律合规）、保荐人律师（境内外律师，核查发行人资质及交易文件）。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">会计师事务所</div>
+      <p>负责对发行人的财务报表进行审计，确保其符合香港或国际会计准则，梳理收入确认、成本结构、关联交易等财务信息，还需参与招股说明书中财务信息部分的撰写，出具符合国际会计准则（IFRS）或香港会计准则（HKFRS）的报告，为投资者提供可靠的财务数据参考。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">行业顾问</div>
+      <p>出具行业研究报告，通常由专业的咨询公司担任，如弗若斯特沙利文（Frost &amp; Sullivan），其在港股 IPO 项目数量上多年位居行业首位。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">监管机构</div>
+      <p>港交所（HKEX）上市科（负责审核申请）及上市委员会（最终审批）；香港证监会（SFC）对中介行为及市场公平性进行监管；境内监管（如 H 股发行人需经中国证监会备案）。</p>
+    </div>
+  </div>
+
+  <h4>案例解析：快手科技 2021 年港股 IPO</h4>
+  <p>快手科技 2021 年在港股 IPO 上市，是港股历史上最大规模的互联网 IPO（募资 483 亿港元），下面对各主体进行简要解析。</p>
+
+  <div class="card">
+    <div class="c-t">1. 发行人</div>
+    <p><strong>Kuaishou Technology</strong>（开曼群岛注册，港股上市代码 1024）</p>
+    <p>境内运营实体：</p>
+    <ul class="plain">
+      <li>北京快手科技有限公司（VIE 协议控制的核心公司，持有 ICP 牌照等）</li>
+      <li>杭州游趣网络有限公司（游戏业务主体，规避外资准入限制）</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="c-t">2. 保荐人（Sponsor）</div>
+    <p><strong>摩根士丹利、美银证券、华兴资本</strong></p>
+    <p>摩根士丹利和美银证券作为全球协调人和牵头保荐人，凭借其庞大的国际分销网络，负责全球发行，尤其是面向美国、欧洲的机构投资者。</p>
+    <p>华兴资本作为牵头保荐人，更侧重于对中国市场和科技行业的理解，以及协调与中国监管机构和投资者的关系。</p>
+    <p>三者共同负责尽职调查、招股书撰写、与港交所沟通、定价和承销。</p>
+  </div>
+
+  <div class="card">
+    <div class="c-t">3. 承销团</div>
+    <p>除了三家保荐人自身也是承销商外，承销团还包含了海通国际、中银国际等多家中外券商，共同组建强大的销售网络，确保股票被超额认购（快手 IPO 超额认购约 1200 倍+）。</p>
+    <div class="callout callout-warn">
+      <span class="co-t">注 意</span>
+      <p>需要注意，若定价过高或销售不力，可能导致认购不足，承销商需动用自有资金买入剩余股票（“硬包销”下），造成直接财务损失。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="c-t">4. 律师事务所</div>
+    <p><strong>（1）发行人境外律师</strong>：设计“同股不同权+VIE”架构，处理美国制裁风险；设计上市架构（如红筹架构、同股不同权架构）。起草招股说明书（除了财务数据和纯中国法律部分外）的绝大部分内容。就香港上市规则、公司治理、披露责任提供建议。负责撰写与全球发售相关的境外法律文件。</p>
+    <p><strong>（2）发行人境内律师</strong>：确保直播业务不涉外资禁入，数据跨境方案通过网信办审查；对快手科技在中国境内的所有运营实体（如北京快手科技有限公司）进行全面的法律尽职调查。核查内容包括：业务牌照、知识产权、数据合规（非常重要）、重大合同、物业资产、劳动关系、税务等。出具中国法律意见书，确认其中国业务合法合规，这份意见书是招股书的基础文件之一。</p>
+    <p><strong>（3）保荐人境外律师</strong>：核查招股书国际法律章节，预防集体诉讼；协助保荐人进行全面的尽职调查。审阅和修改发行人境外律师起草的招股书，从保护保荐人、确保披露万无一失的角度，提出更严谨、更保守的措辞。就保荐人的责任和义务提供法律建议。</p>
+    <p><strong>（4）保荐人境内律师</strong>：独立验证 VIE 协议有效性，出具无重大违法违规证明；独立于发行人境内律师，对发行人的中国业务进行尽职调查。核查和验证发行人境内律师出具的法律意见是否准确、完整。就保荐人在尽职调查中遇到的特定中国法律问题提供独立意见，帮助保荐人理解风险。</p>
+  </div>
+
+  <div class="card">
+    <div class="c-t">5. 会计师事务所</div>
+    <p><strong>普华永道</strong>：对快手科技过去几年的财务报表进行审计，并出具符合香港财务报告准则（HKFRS）的审计报告。负责招股书中所有财务数据的准确性，是投资者信任的基石。</p>
+  </div>
+
+  <div class="card">
+    <div class="c-t">6. 行业顾问</div>
+    <p><strong>弗若斯特沙利文</strong>：受保荐人聘请，出具关于中国短视频和直播行业的市场规模、用户增长、竞争格局的分析报告。该报告为招股书中的“行业概览”章节提供了数据支持，向市场证明快手所在赛道的巨大潜力。</p>
+  </div>
+
+  <div class="card">
+    <div class="c-t">7. 监管机构</div>
+    <p><strong>（1）港交所（HKEX）上市科（负责审核申请）审批</strong>：上市科对快手的上市申请进行了多轮问询，重点关注其同股不同权架构、公司治理、关联交易、业务模式可持续性、风险因素等。</p>
+    <p><strong>（2）上市委员会</strong>：最终举行聆讯并批准了快手的上市申请。</p>
+    <p><strong>（3）香港证监会（SFC）</strong>：对保荐人等中介机构在上市过程中的行为进行监督，并审阅招股书以确保其信息披露符合《公司条例》要求，保护投资者权益。</p>
+    <p><strong>（4）境内监管（如 H 股发行人需经中国证监会备案）</strong>：由于快手是注册在开曼群岛的“红筹”架构公司（主要运营实体在境内），在当时其上市需获得中国证监会的“小路条”（受理函）和“大路条”（批准函），以确认其境外上市合规无异议。</p>
+    <ul class="plain">
+      <li><strong>“小路条”</strong>：正式名称是《受理通知书》。在拿到“小路条”之前，企业通常不能向港交所正式递交 A1 申请（上市申请表）。这是一种程序上的控制，确保企业在向境外监管机构申请前，已得到国内监管的“初步点头”。</li>
+      <li><strong>“大路条”</strong>：正式名称是《境外上市批准通知书》。港交所在公司挂牌交易前，会要求公司提供这份批准文件作为证明。没有“大路条”，即使港交所已经批准了上市，公司也无法开始交易。</li>
+    </ul>
+    <div class="callout callout-warn">
+      <span class="co-t">需要特别注意</span>
+      <p>上述关于“小路条”和“大路条”的复杂审批流程已经成为历史。自 2023 年 3 月 31 日起，《境内企业境外发行证券和上市管理试行办法》正式生效，全面实施备案制。企业在向境外提交上市申请后（如向港交所所递交 A1 后），在规定时间内向中国证监会备案即可。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2.7 知识清单 ============ -->
+<section class="sec" id="sec-knowledge-list">
+  <h3 class="sec-h"><span class="no">2.7</span>知识清单</h3>
+
+  <h4>一、37 号文登记</h4>
+  <div class="table-wrap">
+    <table>
+      <tbody>
+        <tr><td style="width:22%"><span class="td-h">全称</span></td><td>汇发〔2014〕37 号——境内居民通过特殊目的公司（SPV）境外投融资及返程投资外汇登记</td></tr>
+        <tr><td><span class="td-h">适用主体</span></td><td>中国籍自然人（创始人、股东、高管、员工）</td></tr>
+        <tr><td><span class="td-h">法律依据</span></td><td>国家外汇管理局（外管局）37 号文</td></tr>
+        <tr><td><span class="td-h">本质</span></td><td>个人境外持股、融资、上市、返程投资的外汇合规登记</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>业务场景：</strong></p>
+  <ul class="plain">
+    <li>个人在开曼/BVI 设 SPV，准备境外上市（红筹/VIE）；</li>
+    <li>SPV 返程投资国内，设 WFOE/控制境内公司；</li>
+    <li>员工境外股权激励（ESOP）；</li>
+    <li>个人境外持股、分红、减持资金合法回流。</li>
+  </ul>
+
+  <h4>二、ODI 备案</h4>
+  <div class="table-wrap">
+    <table>
+      <tbody>
+        <tr><td style="width:22%"><span class="td-h">全称</span></td><td>境外直接投资（Overseas Direct Investment）备案/核准</td></tr>
+        <tr><td><span class="td-h">适用主体</span></td><td>中国境内企业法人（国企、民企、外企在华子公司等），不含自然人</td></tr>
+        <tr><td><span class="td-h">法律依据</span></td><td>《企业境外投资管理办法》（发改委、商务部）</td></tr>
+        <tr><td><span class="td-h">本质</span></td><td>企业境外实体投资、经营、并购的市场准入与资金出境审批</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>业务场景：</strong></p>
+  <ul class="plain">
+    <li>境内公司去海外新设子公司/合资公司；</li>
+    <li>收购境外公司股权（≥10%）、海外建厂；</li>
+    <li>给海外子公司增资、注资、项目投资。</li>
+  </ul>
+
+  <h4>三、VIE 一揽子协议</h4>
+  <p>① 独家业务合作（技术咨询服务）协议、② 独家购买权协议、③ 贷款协议、④ 股权质押协议、⑤ 表决权委托协议、⑥ 其他（配套知识产权许可协议、配偶知情同意函）等。</p>
+
+  <div class="card">
+    <div class="c-t">1. 独家业务合作（技术咨询服务）协议</div>
+    <p>WFOE 为 VIE 提供技术、咨询、管理等服务，VIE 支付服务费 → WFOE 作为利润 → 境外主体分红。</p>
+  </div>
+  <div class="card">
+    <div class="c-t">2. 独家购买协议</div>
+    <p>WFOE 有权在法律许可的范围内购买（最低优先）VIE 的全部或部分股权。一旦政策允许外资进入该领域，WFOE 可立即将【合同控制】升级为【股权控制】。</p>
+  </div>
+  <div class="card">
+    <div class="c-t">3. 贷款协议</div>
+    <p>WFOE 向 VIE 提供贷款，用于 VIE 注册资本。</p>
+  </div>
+  <div class="card">
+    <div class="c-t">4. 股权质押协议（股权质押登记才生效）</div>
+    <p>VIE 股东将股权质押给 WFOE，作为履行其他协议的担保。一旦 VIE 股东违约或拒绝配合，WFOE 有权直接处置质押股权，实现对 VIE 的强制控制。</p>
+  </div>
+  <div class="card">
+    <div class="c-t">5. 股东表决权委托协议</div>
+    <p>VIE 股东将其全部或部分权利（包括表决权、董事提名权、分红权等）不可撤销地委托给 WFOE 或其指定人员行使，确保 WFOE 在任何情况下对 VIE 保持实质控制。</p>
+  </div>
+</section>
+
+<!-- ===================== 第三部分 法律尽职调查 ===================== -->
+<div class="part-band" id="part-legaldd">
+  <div class="p-no">PART 03&nbsp;</div>
+  <h2>法律尽职调查</h2>
+  <p class="p-desc">涵盖法律尽调的作用、尽调前期准备阶段（概述、法律尽调清单）、尽职调查实施阶段（现场尽调、网络尽调、政府部门走访、财务数据利用）与结果报告阶段（法律尽调报告的结构）。</p>
+</div>
+
+<section class="sec" id="sec-ldd-role">
+  <h3 class="sec-h"><span class="no">3.1</span>法律尽调的作用</h3>
+  <div class="grid-2">
+    <div class="card">
+      <div class="c-t">作用一：全面评估合法性与法律风险</div>
+      <p>帮助股权投资基金<strong>全面评估企业资产和业务的合法性以及潜在的法律风险</strong>。</p>
+    </div>
+    <div class="card">
+      <div class="c-t">作用二：交易文件的重要依据</div>
+      <p><strong>出具法律尽调报告</strong>并将之作为<strong>准备交易文件的重要依据</strong>。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="sec-ldd-prep">
+  <h3 class="sec-h"><span class="no">3.2</span>尽调前期准备阶段</h3>
+
+  <h4>1. 概述</h4>
+  <div class="steps">
+    <div class="step">
+      <div class="s-t">第一步：初步了解项目的情况</div>
+      <p>何种非诉业务、适用规则、尽调对象的位置与范围、行业信息。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">第二步：准备尽调相关文件</div>
+      <p>准备尽调清单、调查表、访谈笔录、实地走访计划等文件。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">第三步：进场前的碰头沟通</div>
+      <p>与目标公司及相关各方进行进场前的碰头沟通。</p>
+    </div>
+  </div>
+
+  <h4>2. 法律尽调清单</h4>
+
+  <h5>（1）尽调范围</h5>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:8%">项</th><th style="width:37%">尽调事项</th><th>核查要点</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>A</strong></td><td><span class="td-h">目标公司的现状及历史沿革</span></td><td>设立、历史沿革、商业信用等</td></tr>
+        <tr><td><strong>B</strong></td><td><span class="td-h">目标公司的股东及股权稳定性</span></td><td>股权结构、代持与出资等</td></tr>
+        <tr><td><strong>C</strong></td><td><span class="td-h">目标公司的业务经营</span></td><td>业务资质、生产及销售模式、技术研发等</td></tr>
+        <tr><td><strong>D</strong></td><td><span class="td-h">目标公司的主要资产</span></td><td>土地、房屋、固定资产、知识产权、在建工程等</td></tr>
+        <tr><td><strong>E</strong></td><td><span class="td-h">目标公司的对外投资</span></td><td>子公司、分公司等</td></tr>
+        <tr><td><strong>F</strong></td><td><span class="td-h">目标公司的关联交易和同业竞争</span></td><td>—</td></tr>
+        <tr><td><strong>G</strong></td><td><span class="td-h">目标公司的重大债权债务</span></td><td>重大合同、潜在纠纷、应收应付等</td></tr>
+        <tr><td><strong>H</strong></td><td><span class="td-h">目标公司的财务与税务</span></td><td>纳税情况、税收优惠和财务补贴等</td></tr>
+        <tr><td><strong>I</strong></td><td><span class="td-h">目标公司的治理及规范运作</span></td><td>三会运作、资金占用/担保/资金管理等</td></tr>
+        <tr><td><strong>J</strong></td><td><span class="td-h">目标公司的劳动用工</span></td><td>社保公积金、董高兼职等</td></tr>
+        <tr><td><strong>K</strong></td><td><span class="td-h">目标公司的诉讼仲裁及处罚事项</span></td><td>—</td></tr>
+        <tr><td><strong>L</strong></td><td><span class="td-h">环境保护</span></td><td>如适用</td></tr>
+      </tbody>
+    </table>
+    
+  </div>
+
+  <h5>（2）尽调方式</h5>
+  <div class="callout callout-gold">
+    <span class="co-t">尽调方式</span>
+    <p>尽调方式通常包括<strong>书面核查、实地调查、查询（政府部门）、函证、面谈、复核</strong>等。</p>
+  </div>
+</section>
+
+<section class="sec" id="sec-ldd-impl">
+  <h3 class="sec-h"><span class="no">3.3</span>尽职调查实施阶段</h3>
+
+  <h4>1. 现场尽调</h4>
+  <div class="grid-2">
+    <div class="card">
+      <div class="c-t">（1）异常情况记录与补充清单</div>
+      <p>翻阅底稿材料，对于发现存在<strong>缺漏、事实不明、不合规、违法等异常情况</strong>及时作好记录（备忘录），以便整理《补充尽调清单》给目标公司补充提供，同时作为访谈问题设计的来源。</p>
+    </div>
+    <div class="card">
+      <div class="c-t">（2）底稿归类与瑕疵补救</div>
+      <p>翻阅底稿材料时，应同步对底稿文件进行<strong>归类整理</strong>，合同缺少盖章/签字、文件打印/复印不清的做好<strong>瑕疵补救</strong>。</p>
+    </div>
+  </div>
+
+  <h4>2. 网络尽调</h4>
+
+  <h5>（1）常见的非诉尽调网站和工具</h5>
+  <div class="grid-2">
+    <div class="card">
+      <div class="c-t">① 主体信息</div>
+      <ul class="plain">
+        <li>国家企业信用信息公示系统</li>
+        <li>地方工商网</li>
+        <li>全国组织机构代码管理中心</li>
+        <li>企查查 / 启信宝 / 天眼查</li>
+        <li>公司注册处综合资讯系统（香港公司）</li>
+        <li>经济部商业司（中国台湾地区相关公司）等</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="c-t">② 业务资质</div>
+      <ul class="plain">
+        <li>行业网站如国家质量监督检验检疫总局（生产许可证 / 特种设备许可证 / 质量专业技术人员）</li>
+        <li>文化和旅游部（营业性演出许可证 / 网络文化经营许可证 / 娱乐经营许可证）</li>
+        <li>住房和城乡建设部-全国建筑市场监管公共服务平台（建设工程设计 / 监理 / 造价咨询 / 房地产开发等企业及其人员的资质）</li>
+        <li>国家食品药品监督管理总局（如药品生产许可证、GSP 认证证书）等</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="c-t">③ 财产信息</div>
+      <ul class="plain">
+        <li>国土资源部 / 中国土地市场网</li>
+        <li>动产融资统一登记平台（央行）</li>
+        <li>中国商标局 / 标库网</li>
+        <li>中国及多国专利审查信息查询 / soopat</li>
+        <li>ICP / IP 地址 / 域名信息备案管理系统</li>
+        <li>中国版权保护中心</li>
+        <li>香港特别行政区政府知识产权署商标检索</li>
+        <li>人民法院诉讼资产网等</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="c-t">④ 证券业务相关信息</div>
+      <ul class="plain">
+        <li>信用中国</li>
+        <li>证监会</li>
+        <li>深交所 / 上交所</li>
+        <li>全国中小企业股份转让系统（新三板）</li>
+        <li>证券业协会 / 基金业协会</li>
+        <li>巨潮资讯网 / 东方财富网 / 见微数据等</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card" style="grid-column: 1 / -1; margin: 1rem 0 0;">
+    <div class="c-t">⑤ 涉诉信息</div>
+    <ul class="plain" style="margin-bottom: 0;">
+      <li>行贿犯罪档案查询（检察院系统开通的查询平台）</li>
+      <li>中国裁判文书网</li>
+      <li>各地省高院</li>
+      <li>全国法院被执行人信息查询</li>
+      <li>中国法院网-公告查询</li>
+      <li>北大法宝、威科先行、无讼等</li>
+    </ul>
+  </div>
+
+  <h5>（2）网络尽调注意事项</h5>
+  <div class="callout callout-warn">
+    <span class="co-t">注意事项</span>
+    <p><strong>① 电子底稿留存</strong>：按照证监会的要求，网络核查底稿需要明确<strong>核查时间、核查来源、核查人</strong>等信息，并制作核查笔记。建议使用“页面另存为 PDF”的方式保持电子底稿；比起页面截图，PDF 底稿能保留网址信息、查询日期、查询时间等，还能保留该页面上所有信息，不受篇幅限制。</p>
+    <p><strong>② 底稿命名管理</strong>：建议通过文件命名和文件夹命名的方式区分不同的电子底稿，如查询公示系统的底稿中，对同一公司，在不同的阶段，非诉律师可能需要查询数次，因此需要在文件名中体现查询时间，方便查找。</p>
+  </div>
+
+  <h4>3. 政府部门走访</h4>
+  <div class="steps">
+    <div class="step">
+      <div class="s-t">（1）工商局</div>
+      <p>打印目标公司的<strong>工商内档</strong>，用于核查公司的设立及历史沿革是否合法合规，是否存在股权质押和动产抵押。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">（2）中国人民银行 / 开户行</div>
+      <p>打印目标公司的<strong>企业信用报告</strong>和法定代表人 / 实际控制人的<strong>个人征信报告</strong>，用于辅助核查目标公司的有息债务、对外担保、应收账款质押等情况。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">（3）税务部门</div>
+      <p>可以打印<strong>完税凭证、纳税申报表</strong>（有些地方可以由目标公司直接在系统上打印，然后同税务部门预约盖章时间）、<strong>涉税证明</strong>（即纳税情况，税务等级及是否受到税务处罚）等。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">（4）房管局 / 国土局 / 行政服务中心</div>
+      <p>打印<strong>土地、房屋等主要资产</strong>的权属状况、抵押、查封等权利受限情况。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">（5）劳动和社会保障部门</div>
+      <p>打印目标公司<strong>社保及公积金缴纳情况</strong>。</p>
+    </div>
+  </div>
+
+  <h4>4. 如何利用财务数据开展尽调</h4>
+
+  <h5>（1）账务处理流程</h5>
+  <div class="chain">
+    <div class="ch-item">
+      <div class="ch-rank"><b>①</b></div>
+      <div class="ch-body">
+        <div class="ch-t">原始会计凭证</div>
+        <div class="ch-d">如发票</div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </div>
+    <div class="ch-item">
+      <div class="ch-rank"><b>②</b></div>
+      <div class="ch-body">
+        <div class="ch-t">记账凭证</div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </div>
+    <div class="ch-item">
+      <div class="ch-rank"><b>③</b></div>
+      <div class="ch-body">
+        <div class="ch-t">会计账簿</div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </div>
+    <div class="ch-item">
+      <div class="ch-rank"><b>④</b></div>
+      <div class="ch-body">
+        <div class="ch-t">财务报表</div>
+      </div>
+    </div>
+  </div>
+
+  <h5>（2）财务报表（三张表）</h5>
+  <div class="grid-3">
+    <div class="card">
+      <div class="c-t">资产负债表</div>
+      <p>反映公司<strong>财务状况</strong>，包括资产类、负债类、所有者权益类会计科目。</p>
+    </div>
+    <div class="card">
+      <div class="c-t">利润表</div>
+      <p>反映公司<strong>盈利能力</strong>，包括收入类、成本费用类、利润类会计科目。</p>
+    </div>
+    <div class="card">
+      <div class="c-t">现金流量表</div>
+      <p>反映公司<strong>现金流周转能力</strong>，包括经营活动、投资活动、融资活动产生的现金流入流出情况。</p>
+    </div>
+  </div>
+
+  <h5>（3）五个重点会计科目</h5>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th style="width:18%">会计科目</th><th>关注要点</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="td-h">① 其他应收款</span></td>
+          <td>股东及其他关联方占用公司资金，被行政罚款、给其他市场主体支付过违约金大多通过这个会计科目呈现。</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">② 预付账款</span></td>
+          <td>关注是否存在大额预付款长期挂账，是否存在关联方占款、是否存在费用因未开票而长期未入账、是否存在资产未开票长期未入账等。</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">③ 其他应付款</span></td>
+          <td>重点关注是否存在民间资金借贷以及利息情况。</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">④ 营业外收入</span></td>
+          <td>通过该科目关注政府补助情况，了解政府补助的合规性。</td>
+        </tr>
+        <tr>
+          <td><span class="td-h">⑤ 营业外支出</span></td>
+          <td>通过该科目了解行政处罚等事项，关注报告期内是否存在行政处罚、税务滞纳金等。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h5>（4）财务造假的识别</h5>
+  <div class="callout callout-warn">
+    <span class="co-t">警惕信号</span>
+    <p>如果标的公司<strong>应收款占主营业务比重很高</strong>，要怀疑虚增销售、财务造假的可能性；或者公司产品市场竞争力低，结算周期长。</p>
+    <p>如果标的公司利润表有很多<strong>未分配利润</strong>，但现金流量表里<strong>经营性现金流很少</strong>，财务造假的可能性也很大。</p>
+  </div>
+</section>
+
+<section class="sec" id="sec-ldd-report">
+  <h3 class="sec-h"><span class="no">3.4</span>结果报告阶段</h3>
+  <p>法律尽调报告的结构通常包括<strong>简称与定义、前言、正文、附件</strong>四个部分：</p>
+  <div class="steps">
+    <div class="step">
+      <div class="s-t">一、简称与定义</div>
+      <p>【填写标的公司简称、项目简称】。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">二、前言</div>
+      <p>尽调范围和目的、假设性前提、使用用途和责任限制声明。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">三、正文</div>
+      <p>风险提示及建议（汇总本次尽调发现的全部法律问题、整改建议）+ 核查事项。</p>
+    </div>
+    <div class="step">
+      <div class="s-t">四、附件</div>
+      <p>与尽调相关的支持性文件材料。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="c-t">正文·二、核查事项（十项）</div>
+    <ul class="plain" style="columns: 2; column-gap: 2.5rem; margin-bottom: 0;">
+      <li>（1）主体信息、历史沿革</li>
+      <li>（2）公司股东、股权情况</li>
+      <li>（3）公司关联方、关联交易和同业竞争</li>
+      <li>（4）主营业务和业务资质</li>
+      <li>（5）主要资产</li>
+      <li>（6）重大债权债务</li>
+      <li>（7）财务税务和财政补贴</li>
+      <li>（8）诉讼仲裁和行政处罚</li>
+      <li>（9）劳动、社会保险和住房公积金</li>
+      <li>（10）其他事项</li>
+    </ul>
+  </div>
+</section>
+
+</main>
+</div>
+
+
+
+<!-- 目录导航（浮动按钮 + 抽屉面板） -->
+<button id="toc-fab" aria-label="打开目录导航" aria-expanded="true">☰ 目录</button>
+<div class="tocp-mask show" id="tocp-mask"></div>
+<nav id="toc-panel" aria-label="目录导航面板" class="open">
+  <div class="tocp-head">
+    <span class="tocp-title">目录导航</span>
+    <button class="tocp-close" id="tocp-close" aria-label="关闭目录">×</button>
+  </div>
+  <div id="toc-panel-body"><aside class="toc" id="toc">
+  <div class="toc-title">目 录</div>
+  <div class="toc-sub">
+    <a href="#part-pevc" class="part-label">第一部分 · PE/VC</a>
+    <a href="#sec-pevc-overview" class="">1.1 PE/VC 概述</a>
+    <a href="#sec-mtg" class="">1.2 PE/VC 募投管退</a>
+    <a href="#sec-mtg-ji" class="">　募集</a>
+    <a href="#sec-mtg-tou" class="">　投资</a>
+    <a href="#sec-mtg-guan" class="">　管理</a>
+    <a href="#sec-mtg-tui" class="">　退出</a>
+    <a href="#sec-pevc-legal" class="">1.3 PE/VC 的法律服务</a>
+    <a href="#sec-pevc-terms" class="">1.4 PE/VC 核心术语</a>
+  </div>
+  <div class="toc-sub">
+    <a href="#part-ipo" class="part-label">第二部分 · IPO</a>
+    <a href="#sec-ipo-overview" class="">2.1 IPO 概述</a>
+    <a href="#sec-abhk" class="">2.2 A股与港股</a>
+    <a href="#sec-hk-arch" class="">2.3 境内企业赴港上市架构</a>
+    <a href="#sec-vie-remove" class="">2.4 VIE 架构拆除</a>
+    <a href="#sec-cnr-return" class="">2.5 中概股回归</a>
+    <a href="#sec-hkex-roles" class="">2.6 港交所IPO各方主体及职责</a>
+    <a href="#sec-knowledge-list" class="">2.7 知识清单</a>
+  </div>
+  <div class="toc-sub">
+    <a href="#part-legaldd" class="part-label">第三部分 · 法律尽职调查</a>
+    <a href="#sec-ldd-role" class="">3.1 法律尽调的作用</a>
+    <a href="#sec-ldd-prep" class="">3.2 尽调前期准备阶段</a>
+    <a href="#sec-ldd-impl" class="">3.3 尽职调查实施阶段</a>
+    <a href="#sec-ldd-report" class="">3.4 结果报告阶段</a>
+  </div>
+</aside><aside class="toc" id="toc">
+  
+  <div class="toc-sub">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  <div class="toc-sub">
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  <div class="toc-sub">
+    
+    
+    
+    
+    
+  </div>
+</aside></div>
+</nav>
+
+<button id="backtop" aria-label="回到顶部" class="show">↑</button>
+
+<script src="./_shared/js/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: "neutral", securityLevel: "loose" });
+</script>
+<script>
+  // 目录导航：浮动按钮 + 抽屉面板（复用侧栏目录内容）
+  (function () {
+    var fab = document.getElementById("toc-fab");
+    var panel = document.getElementById("toc-panel");
+    var mask = document.getElementById("tocp-mask");
+    var closeBtn = document.getElementById("tocp-close");
+    var body = document.getElementById("toc-panel-body");
+    var src = document.querySelector(".layout .toc");
+    if (!fab || !panel || !mask || !closeBtn || !body || !src) return;
+
+    // 克隆侧栏目录内容到面板（需在 scroll-spy 初始化前完成，保证高亮同步）
+    body.appendChild(src.cloneNode(true));
+
+    function openPanel() {
+      panel.classList.add("open");
+      mask.classList.add("show");
+      fab.setAttribute("aria-expanded", "true");
+    }
+    function closePanel() {
+      panel.classList.remove("open");
+      mask.classList.remove("show");
+      fab.setAttribute("aria-expanded", "false");
+    }
+
+    fab.addEventListener("click", function () {
+      if (panel.classList.contains("open")) { closePanel(); } else { openPanel(); }
+    });
+    mask.addEventListener("click", closePanel);
+    closeBtn.addEventListener("click", closePanel);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closePanel();
+    });
+    // 点击面板内任意目录链接后自动收起面板
+    body.addEventListener("click", function (e) {
+      if (e.target.closest("a")) closePanel();
+    });
+  })();
+</script>
+<script>
+  (function () {
+    var backtop = document.getElementById("backtop");
+    window.addEventListener("scroll", function () {
+      if (window.scrollY > 600) { backtop.classList.add("show"); }
+      else { backtop.classList.remove("show"); }
+    }, { passive: true });
+    backtop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+
+    var links = Array.prototype.slice.call(document.querySelectorAll('.toc a[href^="#"]'));
+    var targets = links.map(function (a) { return document.getElementById(a.getAttribute("href").slice(1)); });
+    function onScroll() {
+      var y = window.scrollY + 120, idx = -1;
+      for (var i = 0; i < targets.length; i++) {
+        if (targets[i] && targets[i].offsetTop <= y) idx = i;
+      }
+      links.forEach(function (a, i) { a.classList.toggle("active", i === idx); });
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+
+
+<div class="mermaidTooltip" style="opacity: 0;"></div>
+
+</body></html>
